@@ -12,7 +12,6 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
-import { User } from "next-auth";
 
 export const users = pgTable("user", {
   id: text("id").primaryKey().default(sql`gen_random_uuid()`),
