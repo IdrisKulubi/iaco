@@ -4,10 +4,10 @@ import { drizzle } from "drizzle-orm/neon-serverless";
 
 // Get pool configuration from environment variables
 const poolConfig = {
-  connectionString: process.env.POSTGRES_URL!,
-  min: Number(process.env.POSTGRES_POOL_MIN || 5),
-  max: Number(process.env.POSTGRES_POOL_MAX || 20),
-  idleTimeoutMillis: Number(process.env.POSTGRES_IDLE_TIMEOUT || 30000),
+  connectionString: process.env.DATABASE_URL!,
+  min: Number(process.env.DB_POOL_MIN || 5),
+  max: Number(process.env.DB_POOL_MAX || 20),
+  idleTimeoutMillis: Number(process.env.DB_IDLE_TIMEOUT || 30000),
   connectionTimeoutMillis: 5000, // 5 seconds
   maxUses: 10000, // Number of times a connection can be used before being destroyed
 };
