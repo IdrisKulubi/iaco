@@ -18,6 +18,8 @@ export const users = pgTable("users", {
   phone: text("phone"),
   email: text("email").notNull(),
   emailVerified: boolean("email_verified").default(false),
+  verified: boolean("verified").default(false),
+  verificationStatus: text("verification_status").default("pending"),
   name: text("name"),
   image: text("image"),
 

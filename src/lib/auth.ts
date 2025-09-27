@@ -19,6 +19,9 @@ export const auth = betterAuth({
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      // Ensure Google account chooser is shown each time and allow offline access for refresh tokens
+      prompt: "select_account",
+      accessType: "offline",
     },
   },
   session: {
@@ -43,4 +46,3 @@ export const auth = betterAuth({
 });
 
 export type Session = typeof auth.$Infer.Session;
-

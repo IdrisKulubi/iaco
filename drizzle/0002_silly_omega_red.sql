@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "verification_status" boolean DEFAULT false;
