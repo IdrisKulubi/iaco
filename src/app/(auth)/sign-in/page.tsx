@@ -11,8 +11,8 @@ export default function SignInPage() {
   const onGoogle = async () => {
     try {
       setLoading(true);
-      await authClient.signIn.social({ provider: "google" });
-      // By default, Better Auth will handle redirects after provider sign-in
+      await authClient.signIn.social({ provider: "google", callbackURL: "/oboarding" });
+      // Redirects to /oboarding after successful sign-in
     } catch (e) {
       console.error(e);
       setLoading(false);

@@ -11,8 +11,8 @@ export default function SignUpPage() {
   const onGoogle = async () => {
     try {
       setLoading(true);
-      await authClient.signIn.social({ provider: "google" });
-      // Better Auth will handle provider redirect and callback flow
+      await authClient.signIn.social({ provider: "google", callbackURL: "/oboarding" });
+      // Redirects to /oboarding after successful sign-up
     } catch (e) {
       console.error(e);
       setLoading(false);
