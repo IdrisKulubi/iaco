@@ -50,7 +50,20 @@ export default function SignUpPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="flex items-start space-x-3 p-4 rounded-lg bg-muted/30">
+        
+
+          <Button
+            onClick={onGoogle}
+            className={`w-full h-11 rounded-xl transition ${
+              agreedToTerms
+                ? "bg-primary text-primary-foreground shadow-[0_10px_20px_-10px_var(--color-primary)] hover:opacity-90"
+                : "bg-muted text-muted-foreground cursor-not-allowed"
+            }`}
+            disabled={loading || !agreedToTerms}
+          >
+            {loading ? "Redirecting…" : "Sign up with Google"}
+          </Button>
+  <div className="flex items-start space-x-3 p-4 rounded-lg bg-muted/30">
             <Checkbox
               id="terms"
               checked={agreedToTerms}
@@ -77,19 +90,6 @@ export default function SignUpPage() {
               </p>
             </div>
           </div>
-
-          <Button
-            onClick={onGoogle}
-            className={`w-full h-11 rounded-xl transition ${
-              agreedToTerms
-                ? "bg-primary text-primary-foreground shadow-[0_10px_20px_-10px_var(--color-primary)] hover:opacity-90"
-                : "bg-muted text-muted-foreground cursor-not-allowed"
-            }`}
-            disabled={loading || !agreedToTerms}
-          >
-            {loading ? "Redirecting…" : "Sign up with Google"}
-          </Button>
-
           <div className="relative text-center">
             <span className="px-3 text-xs text-muted-foreground bg-card relative z-10">
               or
