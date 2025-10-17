@@ -1,26 +1,27 @@
 /**
  * Profile Server Actions
- * 
+ *
  * Server actions for user profile CRUD operations with proper validation.
  * These actions handle onboarding data and profile management.
  */
 
-'use server';
+"use server";
 
-import { eq } from 'drizzle-orm';
-import db from '../../../db/drizzle';
-import { userProfiles } from '../../../db/schema';
-import { 
-  createUserProfileSchema, 
+import { eq } from "drizzle-orm";
+import { headers } from "next/headers";
+import db from "../../../db/drizzle";
+import { userProfiles } from "../../../db/schema";
+import {
+  createUserProfileSchema,
   updateUserProfileSchema,
   completeOnboardingSchema,
   type CreateUserProfileInput,
   type UpdateUserProfileInput,
-  type CompleteOnboardingInput
-} from '../validations/profile';
-import { ActionResponse } from '../types';
-import { auth } from '../auth';
-import { revalidatePath } from 'next/cache';
+  type CompleteOnboardingInput,
+} from "../validations/profile";
+import { ActionResponse } from "../types";
+import { auth } from "../auth";
+import { revalidatePath } from "next/cache";
 
 /**
  * Get user profile by user ID
@@ -29,11 +30,13 @@ export async function getUserProfile(userId?: string): Promise<ActionResponse> {
   try {
     // If no userId provided, get from session
     if (!userId) {
-      const session = await auth();
+      const session = await auth.api.getSession({
+        headers: await headers(),
+      });
       if (!session?.user?.id) {
         return {
           success: false,
-          error: 'Authentication required'
+          error: "Authentication required",
         };
       }
       userId = session.user.id;
@@ -48,19 +51,19 @@ export async function getUserProfile(userId?: string): Promise<ActionResponse> {
     if (profile.length === 0) {
       return {
         success: false,
-        error: 'Profile not found'
+        error: "Profile not found",
       };
     }
 
     return {
       success: true,
-      data: profile[0]
+      data: profile[0],
     };
   } catch (error) {
-    console.error('Error fetching user profile:', error);
+    console.error("Error fetching user profile:", error);
     return {
       success: false,
-      error: 'Failed to fetch profile'
+      error: "Failed to fetch profile",
     };
   }
 }
@@ -73,11 +76,13 @@ export async function createUserProfile(
 ): Promise<ActionResponse> {
   try {
     // Get current user from session
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
     if (!session?.user?.id) {
       return {
         success: false,
-        error: 'Authentication required'
+        error: "Authentication required",
       };
     }
 
@@ -94,7 +99,7 @@ export async function createUserProfile(
     if (existingProfile.length > 0) {
       return {
         success: false,
-        error: 'Profile already exists'
+        error: "Profile already exists",
       };
     }
 
@@ -111,27 +116,27 @@ export async function createUserProfile(
       .returning();
 
     // Revalidate relevant paths
-    revalidatePath('/onboarding');
-    revalidatePath('/profile');
+    revalidatePath("/onboarding");
+    revalidatePath("/profile");
 
     return {
       success: true,
       data: newProfile[0],
-      message: 'Profile created successfully'
+      message: "Profile created successfully",
     };
   } catch (error) {
-    console.error('Error creating user profile:', error);
-    
-    if (error instanceof Error && error.name === 'ZodError') {
+    console.error("Error creating user profile:", error);
+
+    if (error instanceof Error && error.name === "ZodError") {
       return {
         success: false,
-        error: 'Invalid input data'
+        error: "Invalid input data",
       };
     }
 
     return {
       success: false,
-      error: 'Failed to create profile'
+      error: "Failed to create profile",
     };
   }
 }
@@ -144,11 +149,13 @@ export async function updateUserProfile(
 ): Promise<ActionResponse> {
   try {
     // Get current user from session
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
     if (!session?.user?.id) {
       return {
         success: false,
-        error: 'Authentication required'
+        error: "Authentication required",
       };
     }
 
@@ -165,7 +172,7 @@ export async function updateUserProfile(
     if (existingProfile.length === 0) {
       return {
         success: false,
-        error: 'Profile not found'
+        error: "Profile not found",
       };
     }
 
@@ -180,27 +187,27 @@ export async function updateUserProfile(
       .returning();
 
     // Revalidate relevant paths
-    revalidatePath('/profile');
-    revalidatePath('/onboarding');
+    revalidatePath("/profile");
+    revalidatePath("/onboarding");
 
     return {
       success: true,
       data: updatedProfile[0],
-      message: 'Profile updated successfully'
+      message: "Profile updated successfully",
     };
   } catch (error) {
-    console.error('Error updating user profile:', error);
-    
-    if (error instanceof Error && error.name === 'ZodError') {
+    console.error("Error updating user profile:", error);
+
+    if (error instanceof Error && error.name === "ZodError") {
       return {
         success: false,
-        error: 'Invalid input data'
+        error: "Invalid input data",
       };
     }
 
     return {
       success: false,
-      error: 'Failed to update profile'
+      error: "Failed to update profile",
     };
   }
 }
@@ -213,11 +220,13 @@ export async function completeOnboarding(
 ): Promise<ActionResponse> {
   try {
     // Get current user from session
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
     if (!session?.user?.id) {
       return {
         success: false,
-        error: 'Authentication required'
+        error: "Authentication required",
       };
     }
 
@@ -261,28 +270,28 @@ export async function completeOnboarding(
     }
 
     // Revalidate relevant paths
-    revalidatePath('/onboarding');
-    revalidatePath('/profile');
-    revalidatePath('/');
+    revalidatePath("/onboarding");
+    revalidatePath("/profile");
+    revalidatePath("/");
 
     return {
       success: true,
       data: profile[0],
-      message: 'Onboarding completed successfully'
+      message: "Onboarding completed successfully",
     };
   } catch (error) {
-    console.error('Error completing onboarding:', error);
-    
-    if (error instanceof Error && error.name === 'ZodError') {
+    console.error("Error completing onboarding:", error);
+
+    if (error instanceof Error && error.name === "ZodError") {
       return {
         success: false,
-        error: 'Invalid input data'
+        error: "Invalid input data",
       };
     }
 
     return {
       success: false,
-      error: 'Failed to complete onboarding'
+      error: "Failed to complete onboarding",
     };
   }
 }
@@ -293,11 +302,13 @@ export async function completeOnboarding(
 export async function skipOnboarding(): Promise<ActionResponse> {
   try {
     // Get current user from session
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
     if (!session?.user?.id) {
       return {
         success: false,
-        error: 'Authentication required'
+        error: "Authentication required",
       };
     }
 
@@ -316,9 +327,9 @@ export async function skipOnboarding(): Promise<ActionResponse> {
         .insert(userProfiles)
         .values({
           userId: session.user.id,
-          experienceLevel: 'beginner',
-          investmentObjectives: ['learning'],
-          riskTolerance: 'low',
+          experienceLevel: "beginner",
+          investmentObjectives: ["learning"],
+          riskTolerance: "low",
           completedOnboarding: true,
         })
         .returning();
@@ -335,20 +346,20 @@ export async function skipOnboarding(): Promise<ActionResponse> {
     }
 
     // Revalidate relevant paths
-    revalidatePath('/onboarding');
-    revalidatePath('/profile');
-    revalidatePath('/');
+    revalidatePath("/onboarding");
+    revalidatePath("/profile");
+    revalidatePath("/");
 
     return {
       success: true,
       data: profile[0],
-      message: 'Onboarding skipped successfully'
+      message: "Onboarding skipped successfully",
     };
   } catch (error) {
-    console.error('Error skipping onboarding:', error);
+    console.error("Error skipping onboarding:", error);
     return {
       success: false,
-      error: 'Failed to skip onboarding'
+      error: "Failed to skip onboarding",
     };
   }
 }
@@ -356,15 +367,19 @@ export async function skipOnboarding(): Promise<ActionResponse> {
 /**
  * Check if user has completed onboarding
  */
-export async function hasCompletedOnboarding(userId?: string): Promise<ActionResponse<boolean>> {
+export async function hasCompletedOnboarding(
+  userId?: string
+): Promise<ActionResponse<boolean>> {
   try {
     // If no userId provided, get from session
     if (!userId) {
-      const session = await auth();
+      const session = await auth.api.getSession({
+        headers: await headers(),
+      });
       if (!session?.user?.id) {
         return {
           success: false,
-          error: 'Authentication required'
+          error: "Authentication required",
         };
       }
       userId = session.user.id;
@@ -377,17 +392,18 @@ export async function hasCompletedOnboarding(userId?: string): Promise<ActionRes
       .limit(1);
 
     // If no profile exists, onboarding is not complete
-    const completed = profile.length > 0 ? profile[0].completedOnboarding : false;
+    const completed =
+      profile.length > 0 ? profile[0].completedOnboarding : false;
 
     return {
       success: true,
-      data: completed
+      data: completed,
     };
   } catch (error) {
-    console.error('Error checking onboarding status:', error);
+    console.error("Error checking onboarding status:", error);
     return {
       success: false,
-      error: 'Failed to check onboarding status'
+      error: "Failed to check onboarding status",
     };
   }
 }
@@ -398,11 +414,13 @@ export async function hasCompletedOnboarding(userId?: string): Promise<ActionRes
 export async function deleteUserProfile(): Promise<ActionResponse> {
   try {
     // Get current user from session
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
     if (!session?.user?.id) {
       return {
         success: false,
-        error: 'Authentication required'
+        error: "Authentication required",
       };
     }
 
@@ -412,18 +430,18 @@ export async function deleteUserProfile(): Promise<ActionResponse> {
       .where(eq(userProfiles.userId, session.user.id));
 
     // Revalidate relevant paths
-    revalidatePath('/profile');
-    revalidatePath('/onboarding');
+    revalidatePath("/profile");
+    revalidatePath("/onboarding");
 
     return {
       success: true,
-      message: 'Profile deleted successfully'
+      message: "Profile deleted successfully",
     };
   } catch (error) {
-    console.error('Error deleting user profile:', error);
+    console.error("Error deleting user profile:", error);
     return {
       success: false,
-      error: 'Failed to delete profile'
+      error: "Failed to delete profile",
     };
   }
 }
