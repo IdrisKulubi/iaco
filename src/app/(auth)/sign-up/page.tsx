@@ -11,7 +11,7 @@ export default function SignUpPage() {
   const onGoogle = async () => {
     try {
       setLoading(true);
-      await authClient.signIn.social({ provider: "google", callbackURL: "/oboarding" });
+      await authClient.signIn.social({ provider: "google", callbackURL: "/onboarding" });
       // Redirects to /oboarding after successful sign-up
     } catch (e) {
       console.error(e);

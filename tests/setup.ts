@@ -1,4 +1,5 @@
 import { beforeAll, afterAll } from 'vitest';
+import '@testing-library/jest-dom';
 import * as schema from '../db/schema';
 
 // Mock database setup for schema validation tests

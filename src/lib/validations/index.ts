@@ -9,6 +9,6 @@
 export * from './common';
 
 // Export validation schemas as they are implemented
-// Example: export * from './profile';
+export * from './profile';
 // Example: export * from './binance';
 // Example: export * from './chat';
