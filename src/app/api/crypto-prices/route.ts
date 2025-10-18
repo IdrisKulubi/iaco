@@ -13,9 +13,9 @@ const POPULAR_CRYPTOS = [
 
 export async function GET() {
   try {
-    const symbols = POPULAR_CRYPTOS.join(',');
+    // Fetch all tickers and filter for our popular cryptos
     const response = await fetch(
-      `https://api.binance.com/api/v3/ticker/24hr?symbols=[${symbols.split(',').map(s => `"${s}"`).join(',')}]`,
+      'https://api.binance.com/api/v3/ticker/24hr',
       { next: { revalidate: 10 } } // Cache for 10 seconds
     );
 
@@ -25,7 +25,14 @@ export async function GET() {
 
     const data = await response.json();
 
-    const formattedData = data.map((item: any) => ({
+    // Filter for our popular cryptos
+    const filteredData = data.filter((item: any) => 
+      POPULAR_CRYPTOS.includes(item.symbol)
+    );
+
+    console.log(`Found ${filteredData.length} matching cryptos out of ${data.length} total`);
+
+    const formattedData = filteredData.map((item: any) => ({
       symbol: item.symbol.replace('USDT', ''),
       name: getCryptoName(item.symbol),
       price: parseFloat(item.lastPrice).toFixed(2),
@@ -35,6 +42,7 @@ export async function GET() {
       low24h: parseFloat(item.lowPrice).toFixed(2),
     }));
 
+    console.log('Returning crypto data:', formattedData.map(d => d.symbol));
     return NextResponse.json(formattedData);
   } catch (error) {
     console.error('Error fetching crypto prices:', error);
