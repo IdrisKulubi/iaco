@@ -95,7 +95,7 @@ export function CryptoPrices() {
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
           >
             Live Crypto{' '}
-            <span className="bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
+            <span className=" bg-clip-text ">
               Market Prices
             </span>
           </h2>
@@ -175,7 +175,7 @@ export function CryptoPrices() {
 
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground">
-            💡 Data provided by Binance • Updated in real-time
+          Data provided by Binance • Updated in real-time
           </p>
         </div>
       </div>

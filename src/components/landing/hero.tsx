@@ -87,7 +87,7 @@ export function Hero() {
               variant="outline"
               className="px-4 py-2 text-sm border-primary/50 bg-primary/5"
             >
-              🚀 AI-Powered Crypto Learning Platform
+            AI-Powered Crypto Learning Platform
             </Badge>
           </div>
 
@@ -97,7 +97,7 @@ export function Hero() {
             className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
           >
             Your AI Crypto{' '}
-            <span className="bg-gradient-to-r from-primary via-blue-500 to-blue-400 bg-clip-text text-transparent">
+            <span className="text-primary">
               Learning Assistant
             </span>
           </h1>
