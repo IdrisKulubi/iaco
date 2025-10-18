@@ -1,7 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { TrendingUp, Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faRedditAlien, faYoutube, faDiscord, faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false;
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,10 +18,8 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground group-hover:scale-105 transition-transform">
-                <TrendingUp className="w-6 h-6" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
+             
+              <span className="text-xl font-bold  bg-clip-text text-primary ">
                 IACO
               </span>
             </Link>
@@ -26,28 +29,31 @@ export function Footer() {
               designed for beginners.
             </p>
             <div className="flex gap-3">
-              <a
-                href="https://github.com/IdrisKulubi/iaco"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
-              >
+             
+              <a href="#" aria-label="Twitter" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
-              >
+              <a href="#" aria-label="LinkedIn" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
                 <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="#" aria-label="Instagram" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
+                <FontAwesomeIcon icon={faInstagram} className="w-4 h-4" />
+              </a>
+              <a href="#" aria-label="Reddit" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
+                <FontAwesomeIcon icon={faRedditAlien} className="w-4 h-4" />
+              </a>
+              <a href="#" aria-label="YouTube" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
+                <FontAwesomeIcon icon={faYoutube} className="w-4 h-4" />
+              </a>
+              <a href="#" aria-label="Discord" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
+                <FontAwesomeIcon icon={faDiscord} className="w-4 h-4" />
+              </a>
+              <a href="#" aria-label="Facebook" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
+                <FontAwesomeIcon icon={faFacebookF} className="w-4 h-4" />
               </a>
               <a
                 href="mailto:support@iaco.com"
+                aria-label="Email"
                 className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
               >
                 <Mail className="w-4 h-4" />
@@ -177,7 +183,7 @@ export function Footer() {
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground text-center md:text-left">
-              © {currentYear} IACO. All rights reserved. Built with ❤️ for crypto learners.
+              © {currentYear} IACO. All rights reserved. 
             </p>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span>⚠️</span>

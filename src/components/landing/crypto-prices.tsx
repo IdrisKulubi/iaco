@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TrendingUp, TrendingDown } from 'lucide-react';
-import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -127,70 +126,81 @@ export function CryptoPrices() {
           </p>
         </div>
 
+        {/* Ticker */}
+        {cryptoData.length > 0 && (
+          <div className="group relative mb-10 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur ring-1 ring-primary/20">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+            <div className="flex gap-6 py-3 will-change-transform" style={{ animation: 'scrollLeft 35s linear infinite' }}>
+              {[...cryptoData, ...cryptoData].map((crypto, i) => {
+                const isPositive = parseFloat(crypto.change24h) >= 0;
+                return (
+                  <div key={`${crypto.symbol}-${i}`} className="flex items-center gap-3 px-4 py-1 rounded-full bg-black/30 border border-white/10">
+                    <span className="text-sm font-semibold">{crypto.symbol}</span>
+                    <span className="text-sm opacity-80">${parseFloat(crypto.price).toLocaleString()}</span>
+                    <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${isPositive ? 'bg-primary/10 text-primary' : 'bg-red-500/10 text-red-400'}`}>
+                      {isPositive ? <TrendingUp className="h-3 w-3"/> : <TrendingDown className="h-3 w-3"/>}
+                      {Math.abs(parseFloat(crypto.change24h))}%
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        <style jsx>{`
+          .group:hover div[style*='animation'] { animation-play-state: paused; }
+          @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        `}</style>
+
+        {/* Heatmap Grid */}
         {isLoading ? (
           <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full">
             {[...Array(8)].map((_, i) => (
-              <Card key={i} className="p-4 sm:p-6">
+              <div key={i} className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-4 sm:p-6">
                 <Skeleton className="h-6 w-24 mb-4" />
                 <Skeleton className="h-8 w-32 mb-2" />
                 <Skeleton className="h-4 w-20" />
-              </Card>
+              </div>
             ))}
           </div>
         ) : cryptoData.length > 0 ? (
           <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full">
             {cryptoData.map((crypto) => {
-              const isPositive = parseFloat(crypto.change24h) >= 0;
+              const change = parseFloat(crypto.change24h);
+              const isPositive = change >= 0;
+              const intensity = Math.min(Math.abs(change) / 10, 1); // 0-1 scale
+              // Use app primary color (approx RGB of oklch 0.64 0.15 198.6 ~ #06b6d4)
+              const primaryRGB = '6, 182, 212';
+              const bg = isPositive
+                ? `radial-gradient(1200px 300px at 0% 0%, rgba(${primaryRGB},${0.12 + intensity*0.2}) 0%, transparent 60%)`
+                : `radial-gradient(1200px 300px at 0% 0%, rgba(239,68,68,${0.12 + intensity*0.2}) 0%, transparent 60%)`;
               return (
-                <Card
-                  key={crypto.symbol}
-                  className="p-4 sm:p-6 hover:shadow-lg hover:shadow-primary/10 transition-all hover:-translate-y-1 cursor-pointer group"
-                >
-                  <div className="flex items-start justify-between mb-4">
+                <div key={crypto.symbol} className="relative rounded-2xl border border-white/10 bg-black/30 backdrop-blur p-4 sm:p-6 hover:-translate-y-1 transition-transform overflow-hidden">
+                  <div className="pointer-events-none absolute inset-0" style={{ background: bg }} />
+                  <div className="relative z-10 flex items-start justify-between mb-5">
                     <div>
-                      <p className="text-sm text-muted-foreground">{crypto.name}</p>
-                      <p className="text-lg font-bold">{crypto.symbol}</p>
+                      <p className="text-sm text-gray-400">{crypto.name}</p>
+                      <p className="text-xl font-semibold tracking-tight">{crypto.symbol}</p>
                     </div>
-                    <div
-                      className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-                        isPositive
-                          ? 'bg-green-500/10 text-green-600 dark:text-green-400'
-                          : 'bg-red-500/10 text-red-600 dark:text-red-400'
-                      }`}
-                    >
-                      {isPositive ? (
-                        <TrendingUp className="w-3 h-3" />
-                      ) : (
-                        <TrendingDown className="w-3 h-3" />
-                      )}
-                      {Math.abs(parseFloat(crypto.change24h))}%
-                    </div>
+                    <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${isPositive ? 'bg-primary/10 text-primary' : 'bg-red-500/10 text-red-400'}`}>
+                      {isPositive ? <TrendingUp className="h-3 w-3"/> : <TrendingDown className="h-3 w-3"/>}
+                      {Math.abs(change)}%
+                    </span>
                   </div>
-
-                  <div className="space-y-2">
-                    <div>
-                      <p className="text-2xl font-bold group-hover:text-primary transition-colors">
-                        ${parseFloat(crypto.price).toLocaleString()}
-                      </p>
-                      <p className="text-xs text-muted-foreground">Current Price</p>
-                    </div>
-
-                    <div className="flex justify-between text-xs pt-2 border-t">
+                  <div className="relative z-10">
+                    <p className="text-3xl font-bold tracking-tight">${parseFloat(crypto.price).toLocaleString()}</p>
+                    <div className="mt-3 grid grid-cols-2 text-xs gap-4 opacity-80">
                       <div>
-                        <p className="text-muted-foreground">24h High</p>
-                        <p className="font-medium">
-                          ${parseFloat(crypto.high24h).toLocaleString()}
-                        </p>
+                        <p className="text-gray-400">24h High</p>
+                        <p className="font-medium">${parseFloat(crypto.high24h).toLocaleString()}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-muted-foreground">24h Low</p>
-                        <p className="font-medium">
-                          ${parseFloat(crypto.low24h).toLocaleString()}
-                        </p>
+                        <p className="text-gray-400">24h Low</p>
+                        <p className="font-medium">${parseFloat(crypto.low24h).toLocaleString()}</p>
                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
               );
             })}
           </div>
