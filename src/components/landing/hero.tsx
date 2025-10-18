@@ -5,7 +5,7 @@ import Link from 'next/link';
 import gsap from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Bot, TrendingUp, Shield } from 'lucide-react';
+import { ArrowRight, Bot, TrendingUp, Shield, Wallet } from 'lucide-react';
 
 export function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -17,54 +17,87 @@ export function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      tl.from(badgeRef.current, {
-        y: 30,
+      // Set initial states to prevent flash
+      gsap.set([badgeRef.current, titleRef.current, subtitleRef.current, ctaRef.current], {
         opacity: 0,
+        y: 50
+      });
+      
+      // Feature chips inside lanes
+      const chips = cardsRef.current?.querySelectorAll('[data-chip]') as NodeListOf<HTMLElement> | undefined;
+      if (chips && chips.length) {
+        gsap.set(chips, {
+          opacity: 0,
+          y: 20,
+        });
+      }
+
+      // Create timeline with slight delay to ensure DOM is ready
+      const tl = gsap.timeline({ 
+        defaults: { ease: 'power3.out' },
+        delay: 0.1 // Small delay to ensure everything is rendered
+      });
+
+      tl.to(badgeRef.current, {
+        y: 0,
+        opacity: 1,
         duration: 0.6,
       })
-        .from(
+        .to(
           titleRef.current,
           {
-            y: 50,
-            opacity: 0,
+            y: 0,
+            opacity: 1,
             duration: 0.8,
           },
           '-=0.3'
         )
-        .from(
+        .to(
           subtitleRef.current,
           {
-            y: 30,
-            opacity: 0,
+            y: 0,
+            opacity: 1,
             duration: 0.6,
           },
           '-=0.4'
         )
-        .from(
+        .to(
           ctaRef.current,
           {
-            y: 30,
-            opacity: 0,
+            y: 0,
+            opacity: 1,
             duration: 0.6,
           },
           '-=0.3'
         )
-        .from(
-          cardsRef.current?.children || [],
+        // Reveal chips (actual items) rather than lanes
+        .to(
+          cardsRef.current?.querySelectorAll('[data-chip]') || [],
           {
-            y: 40,
-            opacity: 0,
+            y: 0,
+            opacity: 1,
             duration: 0.5,
-            stagger: 0.1,
+            stagger: 0.06,
           },
-          '-=0.3'
+          '-=0.2'
         );
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
+
+  const features = [
+    { label: 'AI Coach', icon: Bot },
+    { label: 'Portfolio Tracking', icon: TrendingUp },
+    { label: 'Secure Auth', icon: Shield },
+    { label: 'Wallet Sync', icon: Wallet },
+  ];
+  const featuresAlt = [
+    { label: 'Beginner Friendly', icon: Shield },
+    { label: 'Live Prices', icon: TrendingUp },
+    { label: 'AI Insights', icon: Bot },
+    { label: 'Manage Wallets', icon: Wallet },
+  ];
 
   return (
     <section
@@ -82,7 +115,7 @@ export function Hero() {
       <div className="container mx-auto px-4 lg:px-8 py-20">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           {/* Badge */}
-          <div ref={badgeRef}>
+          <div ref={badgeRef} className="opacity-0">
             <Badge
               variant="outline"
               className="px-4 py-2 text-sm border-primary/50 bg-primary/5"
@@ -94,7 +127,7 @@ export function Hero() {
           {/* Title */}
           <h1
             ref={titleRef}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight opacity-0"
           >
             Your AI Crypto{' '}
             <span className="text-primary">
@@ -105,14 +138,14 @@ export function Hero() {
           {/* Subtitle */}
           <p
             ref={subtitleRef}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed opacity-0"
           >
             Master cryptocurrency with personalized AI guidance, real-time portfolio
             tracking, and educational insights designed for beginners.
           </p>
 
           {/* CTA Buttons */}
-          <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0">
             <Button size="lg" className="gap-2 group" asChild>
               <Link href="/sign-up">
                 Get Started Free
@@ -124,37 +157,30 @@ export function Hero() {
             </Button>
           </div>
 
-          {/* Feature Cards */}
-          <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
-            <div className="p-6 rounded-xl border bg-card hover:shadow-lg hover:shadow-primary/5 transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 mx-auto">
-                <Bot className="w-6 h-6 text-primary" />
+          {/* Feature Rail - modern marquee chips */}
+          <div ref={cardsRef} className="pt-12">
+            <div className="relative w-full overflow-hidden">
+              <div className="flex gap-4 sm:gap-6 py-3 animate-[scrollLeft_28s_linear_infinite]">
+                {[...features, ...features].map((f, i) => (
+                  <div data-chip key={`f1-${i}`} className="opacity-0 flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-primary/5 dark:bg-black/30 text-sm">
+                    <f.icon className="h-4 w-4 text-primary" />
+                    <span>{f.label}</span>
+                  </div>
+                ))}
               </div>
-              <h3 className="font-semibold text-lg mb-2">AI Coach</h3>
-              <p className="text-sm text-muted-foreground">
-                Get personalized guidance from our intelligent crypto assistant
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl border bg-card hover:shadow-lg hover:shadow-primary/5 transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 mx-auto">
-                <TrendingUp className="w-6 h-6 text-primary" />
+              <div className="flex gap-4 sm:gap-6 py-3 animate-[scrollRight_32s_linear_infinite]">
+                {[...featuresAlt, ...featuresAlt].map((f, i) => (
+                  <div data-chip key={`f2-${i}`} className="opacity-0 flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-primary/5 dark:bg-black/30 text-sm">
+                    <f.icon className="h-4 w-4 text-primary" />
+                    <span>{f.label}</span>
+                  </div>
+                ))}
               </div>
-              <h3 className="font-semibold text-lg mb-2">Portfolio Tracking</h3>
-              <p className="text-sm text-muted-foreground">
-                Connect your Binance account and track your holdings in real-time
-              </p>
             </div>
-
-            <div className="p-6 rounded-xl border bg-card hover:shadow-lg hover:shadow-primary/5 transition-all hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 mx-auto">
-                <Shield className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Educational Focus</h3>
-              <p className="text-sm text-muted-foreground">
-                Learn safely with curated resources and beginner-friendly content
-              </p>
-            </div>
+            <style jsx>{`
+              @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+              @keyframes scrollRight { from { transform: translateX(0); } to { transform: translateX(50%); } }
+            `}</style>
           </div>
         </div>
       </div>
