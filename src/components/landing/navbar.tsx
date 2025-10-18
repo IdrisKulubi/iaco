@@ -1,0 +1,55 @@
+'use client';
+
+import Link from 'next/link';
+import { ModeToggle } from '@/components/themes/mode-toggle';
+import { Button } from '@/components/ui/button';
+import { TrendingUp } from 'lucide-react';
+
+export function LandingNavbar() {
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground group-hover:scale-105 transition-transform">
+              <TrendingUp className="w-6 h-6" />
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-primary to-blue-400 bg-clip-text text-transparent">
+              IACO
+            </span>
+          </Link>
+
+          {/* Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#features" className="text-sm font-medium hover:text-primary transition-colors">
+              Features
+            </a>
+            <a href="#prices" className="text-sm font-medium hover:text-primary transition-colors">
+              Live Prices
+            </a>
+            <a href="#faq" className="text-sm font-medium hover:text-primary transition-colors">
+              FAQ
+            </a>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center gap-4">
+            <ModeToggle />
+            <div className="hidden md:flex gap-2">
+              <Button variant="ghost" asChild>
+                <Link href="/sign-in">Sign In</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/sign-up">Get Started</Link>
+              </Button>
+            </div>
+            <Button size="sm" className="md:hidden" asChild>
+              <Link href="/sign-up">Start</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
