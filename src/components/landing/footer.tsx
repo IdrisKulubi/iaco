@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faRedditAlien, faYoutube, faDiscord, faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faRedditAlien, faYoutube, faDiscord, faFacebookF ,faTwitter,faLinkedinIn,faGoogle} from '@fortawesome/free-brands-svg-icons';
 import { config } from '@fortawesome/fontawesome-svg-core';
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
+
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
@@ -31,10 +33,10 @@ export function Footer() {
             <div className="flex gap-3">
              
               <a href="#" aria-label="Twitter" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
-                <Twitter className="w-4 h-4" />
+                <FontAwesomeIcon icon={faTwitter} className="w-4 h-4" />
               </a>
               <a href="#" aria-label="LinkedIn" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
-                <Linkedin className="w-4 h-4" />
+                <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4" />
               </a>
               <a href="#" aria-label="Instagram" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
                 <FontAwesomeIcon icon={faInstagram} className="w-4 h-4" />
@@ -56,7 +58,7 @@ export function Footer() {
                 aria-label="Email"
                 className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
               >
-                <Mail className="w-4 h-4" />
+                <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4" />
               </a>
             </div>
           </div>
