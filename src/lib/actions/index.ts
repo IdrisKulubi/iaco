@@ -8,6 +8,7 @@
 // Export server actions as they are implemented
 // Example: export * from './auth';
 export * from './profile';
+export * from './account';
 // Example: export * from './chat';
 // Example: export * from './prices';
 // Example: export * from './portfolio';

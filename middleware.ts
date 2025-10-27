@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   });
 
   // Define protected routes that require authentication
-  const protectedRoutes = ["/dashboard", "/profile", "/portfolio", "/chat"];
+  const protectedRoutes = ["/dashboard", "/profile", "/portfolio", "/chat", "/account"];
   const authRoutes = ["/sign-in", "/sign-up"];
   const onboardingRoute = "/onboarding";
 
@@ -112,6 +112,7 @@ export const config = {
     "/sign-up",
     "/onboarding",
     "/oboarding",
+    "/account/:path*",
     "/app",
   ],
 };
