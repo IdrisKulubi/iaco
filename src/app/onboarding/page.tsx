@@ -40,20 +40,21 @@ export default function OnboardingPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center p-4">
         <div className="w-full max-w-2xl space-y-8">
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-2 w-full" />
+          <div className="space-y-3">
+            <Skeleton className="h-4 w-32 bg-gray-200 dark:bg-gray-800" />
+            <Skeleton className="h-2 w-full bg-gray-200 dark:bg-gray-800" />
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 space-y-6">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-8 space-y-6 border">
             <div className="text-center space-y-4">
-              <Skeleton className="h-8 w-64 mx-auto" />
-              <Skeleton className="h-4 w-48 mx-auto" />
+              <Skeleton className="h-10 w-64 mx-auto bg-gray-200 dark:bg-gray-800" />
+              <Skeleton className="h-4 w-48 mx-auto bg-gray-200 dark:bg-gray-800" />
             </div>
             <div className="space-y-4">
-              <Skeleton className="h-32 w-full" />
-              <Skeleton className="h-32 w-full" />
+              <Skeleton className="h-32 w-full bg-gray-200 dark:bg-gray-800 rounded-xl" />
+              <Skeleton className="h-32 w-full bg-gray-200 dark:bg-gray-800 rounded-xl" />
+              <Skeleton className="h-12 w-full bg-gray-200 dark:bg-gray-800 rounded-xl" />
             </div>
           </div>
         </div>
