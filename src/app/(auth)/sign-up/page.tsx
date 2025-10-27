@@ -27,7 +27,6 @@ export default function SignUpPage() {
       setLoading(true);
       await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/onboarding",
       });
     } catch (e) {
       console.error(e);

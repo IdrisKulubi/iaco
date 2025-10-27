@@ -11,7 +11,7 @@ export default function SignInPage() {
   const onGoogle = async () => {
     try {
       setLoading(true);
-      await authClient.signIn.social({ provider: "google", callbackURL: "/onboarding" });
+      await authClient.signIn.social({ provider: "google" });
     } catch (e) {
       console.error(e);
       setLoading(false);

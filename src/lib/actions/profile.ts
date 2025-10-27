@@ -52,6 +52,7 @@ export async function getUserProfile(userId?: string): Promise<ActionResponse> {
       return {
         success: false,
         error: "Profile not found",
+        data: false,
       };
     }
 
@@ -393,7 +394,7 @@ export async function hasCompletedOnboarding(
 
     // If no profile exists, onboarding is not complete
     const completed =
-      profile.length > 0 ? profile[0].completedOnboarding : false;
+      profile.length > 0 ? (profile[0].completedOnboarding ?? false) : false;
 
     return {
       success: true,

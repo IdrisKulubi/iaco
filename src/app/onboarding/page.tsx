@@ -9,48 +9,32 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function OnboardingPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
+    const checkSession = async () => {
       try {
+        // Simple session check - middleware handles redirects
         const { data: session } = await authClient.getSession();
         
         if (!session?.user) {
-          // User is not authenticated, redirect to sign in
+          console.log('[Onboarding] No session found, redirecting to sign-in');
           router.push('/sign-in');
           return;
         }
 
-        setIsAuthenticated(true);
-
-        // Check if user has already completed onboarding
-        try {
-          const response = await fetch('/api/auth/onboarding-status');
-          if (response.ok) {
-            const { completed } = await response.json();
-            if (completed) {
-              // User has already completed onboarding, redirect to home
-              router.push('/');
-              return;
-            }
-          }
-        } catch (error) {
-          console.error('Error checking onboarding status:', error);
-        }
-      } catch (error) {
-        console.error('Error checking authentication:', error);
-        router.push('/sign-in');
-      } finally {
+        console.log('[Onboarding] Session found, showing onboarding flow');
         setIsLoading(false);
+      } catch (error) {
+        console.error('Error checking session:', error);
+        router.push('/sign-in');
       }
     };
 
-    checkAuth();
+    checkSession();
   }, [router]);
 
   const handleOnboardingComplete = () => {
-    // Redirect to home page after onboarding completion
+    console.log('[Onboarding] Onboarding completed, redirecting to home');
     router.push('/');
   };
 
@@ -75,10 +59,6 @@ export default function OnboardingPage() {
         </div>
       </div>
     );
-  }
-
-  if (!isAuthenticated) {
-    return null; // Will redirect to sign-in
   }
 
   return (
