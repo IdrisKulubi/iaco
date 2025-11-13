@@ -1,4 +1,5 @@
 import { LandingNavbar, Hero, CryptoPrices, FAQ, Footer } from '@/components/landing';
+import { ChatBubbleWrapper } from '@/components/chat/chat-bubble-wrapper';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <CryptoPrices />
       <FAQ />
       <Footer />
+      <ChatBubbleWrapper />
     </main>
   );
 }

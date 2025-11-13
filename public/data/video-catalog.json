@@ -1,0 +1,94 @@
+{
+  "videos": [
+    {
+      "id": "intro-to-crypto",
+      "title": "What is Cryptocurrency?",
+      "description": "A beginner-friendly introduction to cryptocurrency and blockchain technology",
+      "url": "https://www.youtube.com/watch?v=1YyAzVmP9xQ",
+      "duration": "10:30",
+      "level": "beginner",
+      "topics": ["basics", "blockchain", "bitcoin"]
+    },
+    {
+      "id": "wallets-explained",
+      "title": "Crypto Wallets Explained",
+      "description": "Learn about hot wallets, cold wallets, and how to keep your crypto safe",
+      "url": "https://www.youtube.com/watch?v=d8IBpfs9bf4",
+      "duration": "8:45",
+      "level": "beginner",
+      "topics": ["wallets", "security", "storage"]
+    },
+    {
+      "id": "blockchain-basics",
+      "title": "How Does Blockchain Work?",
+      "description": "Understanding the technology behind cryptocurrencies",
+      "url": "https://www.youtube.com/watch?v=SSo_EIwHSd4",
+      "duration": "12:15",
+      "level": "beginner",
+      "topics": ["blockchain", "technology", "basics"]
+    },
+    {
+      "id": "buying-first-crypto",
+      "title": "How to Buy Your First Cryptocurrency",
+      "description": "Step-by-step guide to purchasing crypto on exchanges",
+      "url": "https://www.youtube.com/watch?v=0VC8tsYrKZM",
+      "duration": "15:20",
+      "level": "beginner",
+      "topics": ["exchanges", "buying", "getting-started"]
+    },
+    {
+      "id": "crypto-security",
+      "title": "Cryptocurrency Security Best Practices",
+      "description": "Essential security tips to protect your crypto investments",
+      "url": "https://www.youtube.com/watch?v=vt-zXEsJ61U",
+      "duration": "11:40",
+      "level": "beginner",
+      "topics": ["security", "safety", "best-practices"]
+    },
+    {
+      "id": "understanding-altcoins",
+      "title": "Bitcoin vs Altcoins: What's the Difference?",
+      "description": "Learn about different types of cryptocurrencies beyond Bitcoin",
+      "url": "https://www.youtube.com/watch?v=1YyAzVmP9xQ",
+      "duration": "9:30",
+      "level": "beginner",
+      "topics": ["altcoins", "bitcoin", "basics"]
+    },
+    {
+      "id": "defi-introduction",
+      "title": "Introduction to DeFi (Decentralized Finance)",
+      "description": "Understanding decentralized finance and its applications",
+      "url": "https://www.youtube.com/watch?v=k9HYC0EJU6E",
+      "duration": "13:50",
+      "level": "intermediate",
+      "topics": ["defi", "finance", "advanced"]
+    },
+    {
+      "id": "trading-basics",
+      "title": "Crypto Trading for Beginners",
+      "description": "Basic concepts of cryptocurrency trading and market analysis",
+      "url": "https://www.youtube.com/watch?v=1YyAzVmP9xQ",
+      "duration": "16:25",
+      "level": "intermediate",
+      "topics": ["trading", "markets", "analysis"]
+    },
+    {
+      "id": "risk-management",
+      "title": "Risk Management in Crypto Investing",
+      "description": "How to manage risk and protect your investments",
+      "url": "https://www.youtube.com/watch?v=1YyAzVmP9xQ",
+      "duration": "10:15",
+      "level": "beginner",
+      "topics": ["risk", "investing", "strategy"]
+    },
+    {
+      "id": "nft-basics",
+      "title": "What are NFTs?",
+      "description": "Understanding Non-Fungible Tokens and their use cases",
+      "url": "https://www.youtube.com/watch?v=Oz9zw7-_vhM",
+      "duration": "8:55",
+      "level": "beginner",
+      "topics": ["nft", "tokens", "digital-assets"]
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import { User2Icon, ShieldCheckIcon, KeyRoundIcon, Settings2Icon } from 'lucide-
 import UserDetailsForm from '@/components/account/user-details-form';
 import ProfileSettingsForm from '@/components/account/profile-settings-form';
 import BinanceKeysForm from '@/components/account/binance-keys-form';
+import { ChatBubble } from '@/components/chat/chat-bubble';
 
 export default async function AccountPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -133,6 +134,7 @@ export default async function AccountPage() {
           </main>
         </SidebarInset>
       </div>
+      <ChatBubble />
     </SidebarProvider>
   );
 }
