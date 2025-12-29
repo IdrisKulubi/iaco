@@ -9,7 +9,7 @@ interface ChatMessage {
   userId: string;
   content: string;
   role: 'user' | 'assistant';
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   createdAt: Date | null;
 }
 

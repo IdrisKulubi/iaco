@@ -5,21 +5,23 @@
  */
 
 import { z } from 'zod';
-import { nonEmptyString } from './common';
 
 /**
  * Experience level validation
  */
-export const experienceLevelSchema = z.enum(['beginner', 'intermediate'], {
-  errorMap: () => ({ message: 'Please select a valid experience level' }),
-});
+export const experienceLevelSchema = z.union([
+  z.literal('beginner'),
+  z.literal('intermediate')
+]);
 
 /**
  * Risk tolerance validation
  */
-export const riskToleranceSchema = z.enum(['low', 'medium', 'high'], {
-  errorMap: () => ({ message: 'Please select a valid risk tolerance level' }),
-});
+export const riskToleranceSchema = z.union([
+  z.literal('low'),
+  z.literal('medium'),
+  z.literal('high')
+]);
 
 /**
  * Investment objectives validation

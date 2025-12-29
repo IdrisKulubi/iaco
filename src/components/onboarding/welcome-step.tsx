@@ -3,14 +3,14 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  TrendingUpIcon, 
-  ShieldCheckIcon, 
-  BookOpenIcon, 
+import {
+  TrendingUpIcon,
+  ShieldCheckIcon,
+  BookOpenIcon,
   SmartphoneIcon,
   SparklesIcon
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export interface WelcomeStepProps {
   onNext: () => void;
@@ -42,18 +42,20 @@ export function WelcomeStep({ onNext, onSkip, isLoading }: WelcomeStepProps) {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  const containerVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
+        duration: 0.6,
         staggerChildren: 0.1,
       },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
@@ -88,8 +90,8 @@ export function WelcomeStep({ onNext, onSkip, isLoading }: WelcomeStepProps) {
           🚀
         </motion.div>
         <p className="text-lg text-gray-700 dark:text-gray-300 max-w-md mx-auto leading-relaxed">
-          Your personal <span className="font-semibold text-blue-600 dark:text-blue-400">AI-powered</span> crypto learning and portfolio tracking companion. 
-          Let's get you started on your crypto journey!
+          Your personal <span className="font-semibold text-blue-600 dark:text-blue-400">AI-powered</span> crypto learning and portfolio tracking companion.
+          Let&apos;s get you started on your crypto journey!
         </p>
       </motion.div>
 
@@ -146,8 +148,8 @@ export function WelcomeStep({ onNext, onSkip, isLoading }: WelcomeStepProps) {
               <SparklesIcon className="h-3.5 w-3.5" />
             </h4>
             <p className="text-sm text-amber-800 dark:text-amber-300 leading-relaxed">
-              This app provides educational content and portfolio tracking. 
-              It does not provide financial advice. Always do your own research 
+              This app provides educational content and portfolio tracking.
+              It does not provide financial advice. Always do your own research
               and consult with financial professionals before making investment decisions.
             </p>
           </div>

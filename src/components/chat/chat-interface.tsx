@@ -159,9 +159,9 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
       }
 
       setStreamingContent("");
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Subtask 6.3: Handle partial responses from interrupted streams
-      if (error.name === "AbortError") {
+      if (error instanceof Error && error.name === "AbortError") {
         toast.info("Message cancelled");
         
         // If we have partial streaming content, save it

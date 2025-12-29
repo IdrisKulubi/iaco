@@ -5,7 +5,7 @@ import { getUserProfile } from '@/lib/actions/profile';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import Link from 'next/link';
-import { User2Icon, ShieldCheckIcon, KeyRoundIcon, Settings2Icon } from 'lucide-react';
+import { UserIcon, ShieldCheckIcon, KeyIcon, GearIcon } from '@phosphor-icons/react/dist/ssr';
 import UserDetailsForm from '@/components/account/user-details-form';
 import ProfileSettingsForm from '@/components/account/profile-settings-form';
 import BinanceKeysForm from '@/components/account/binance-keys-form';
@@ -22,7 +22,7 @@ export default async function AccountPage() {
         <Sidebar className="border-r">
           <SidebarHeader className="border-b px-6 py-4">
             <div className="flex items-center gap-2">
-              <User2Icon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+              <UserIcon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               <span className="text-base font-semibold text-gray-900 dark:text-gray-100">Account Settings</span>
             </div>
           </SidebarHeader>
@@ -32,17 +32,17 @@ export default async function AccountPage() {
               <SidebarMenu className="space-y-1">
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild className="gap-3 px-3 py-2">
-                    <a href="#profile" className="flex items-center gap-3"><User2Icon className="h-4 w-4" /> <span>Profile</span></a>
+                    <a href="#profile" className="flex items-center gap-3"><UserIcon className="h-4 w-4" /> <span>Profile</span></a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild className="gap-3 px-3 py-2">
-                    <a href="#preferences" className="flex items-center gap-3"><Settings2Icon className="h-4 w-4" /> <span>Preferences</span></a>
+                    <a href="#preferences" className="flex items-center gap-3"><GearIcon className="h-4 w-4" /> <span>Preferences</span></a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild className="gap-3 px-3 py-2">
-                    <a href="#binance" className="flex items-center gap-3"><KeyRoundIcon className="h-4 w-4" /> <span>Binance</span></a>
+                    <a href="#binance" className="flex items-center gap-3"><KeyIcon className="h-4 w-4" /> <span>Binance</span></a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>

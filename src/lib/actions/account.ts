@@ -12,7 +12,6 @@ import {
   type UpdateUserDetailsInput,
   binanceCredentialsSchema,
   type BinanceCredentialsInput,
-  toggleBinanceSchema,
 } from '@/lib/validations/account';
 import { encrypt } from '@/lib/utils/encryption';
 import { ZodError } from 'zod';

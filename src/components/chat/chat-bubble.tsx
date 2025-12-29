@@ -5,11 +5,7 @@ import { MessageCircleIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChatDialog } from "./chat-dialog";
 
-interface ChatBubbleProps {
-  className?: string;
-}
-
-export function ChatBubble({ className }: ChatBubbleProps) {
+export function ChatBubble() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

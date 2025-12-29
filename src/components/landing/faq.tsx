@@ -103,7 +103,7 @@ export function FAQ() {
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Got questions? We've got answers. Learn more about how IACO can help you on
+            Got questions? We&apos;ve got answers. Learn more about how IACO can help you on
             your crypto journey.
           </p>
         </div>

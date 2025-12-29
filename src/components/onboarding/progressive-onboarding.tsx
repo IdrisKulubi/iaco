@@ -1,20 +1,20 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import gsap from 'gsap';
 import { completeOnboarding } from '@/lib/actions/profile';
 import {
-  GraduationCap,
-  Rocket,
-  BookOpen,
-  TrendingUp,
-  PieChart,
-  Sparkles,
-  ArrowRight,
-  Check
-} from 'lucide-react';
+  GraduationCapIcon,
+  RocketIcon,
+  BookOpenIcon,
+  TrendUpIcon,
+  ChartPieIcon,
+  SparkleIcon,
+  ArrowRightIcon,
+  CheckIcon
+} from '@phosphor-icons/react';
 
 interface OnboardingAnswer {
   experienceLevel: 'beginner' | 'intermediate' | null;
@@ -35,7 +35,7 @@ const levelOptions: QuestionOption[] = [
     id: 'beginner',
     label: 'Beginner',
     description: "I'm new to crypto and want to learn the basics",
-    icon: GraduationCap,
+    icon: GraduationCapIcon,
     gradient: 'from-emerald-500 to-teal-600',
     iconBg: 'bg-emerald-500/20',
   },
@@ -43,7 +43,7 @@ const levelOptions: QuestionOption[] = [
     id: 'intermediate',
     label: 'Intermediate',
     description: 'I have some experience and understand the fundamentals',
-    icon: Rocket,
+    icon: RocketIcon,
     gradient: 'from-violet-500 to-purple-600',
     iconBg: 'bg-violet-500/20',
   },
@@ -54,7 +54,7 @@ const objectiveOptions: QuestionOption[] = [
     id: 'learn',
     label: 'Learn',
     description: 'Understand crypto concepts and technology',
-    icon: BookOpen,
+    icon: BookOpenIcon,
     gradient: 'from-blue-500 to-cyan-600',
     iconBg: 'bg-blue-500/20',
   },
@@ -62,7 +62,7 @@ const objectiveOptions: QuestionOption[] = [
     id: 'invest',
     label: 'Invest',
     description: 'Build a portfolio for long-term growth',
-    icon: TrendingUp,
+    icon: TrendUpIcon,
     gradient: 'from-amber-500 to-orange-600',
     iconBg: 'bg-amber-500/20',
   },
@@ -70,7 +70,7 @@ const objectiveOptions: QuestionOption[] = [
     id: 'diversify',
     label: 'Diversify',
     description: 'Add crypto to my existing investments',
-    icon: PieChart,
+    icon: ChartPieIcon,
     gradient: 'from-rose-500 to-pink-600',
     iconBg: 'bg-rose-500/20',
   },
@@ -147,58 +147,58 @@ export function ProgressiveOnboarding() {
     return () => ctx.revert();
   }, []);
 
-  // Animate step transition
-  const animateStepTransition = useCallback((direction: 'next' | 'back') => {
-    const tl = gsap.timeline();
+  // Animate step transition (currently disabled, could be re-enabled for more animations)
+  // const animateStepTransition = useCallback((direction: 'next' | 'back') => {
+  //   const tl = gsap.timeline();
 
-    // Exit animation
-    tl.to(questionRef.current, {
-      opacity: 0,
-      x: direction === 'next' ? -50 : 50,
-      duration: 0.3,
-      ease: 'power2.in',
-    });
+  //   // Exit animation
+  //   tl.to(questionRef.current, {
+  //     opacity: 0,
+  //     x: direction === 'next' ? -50 : 50,
+  //     duration: 0.3,
+  //     ease: 'power2.in',
+  //   });
 
-    tl.to(
-      '.option-card',
-      {
-        opacity: 0,
-        y: 20,
-        scale: 0.95,
-        duration: 0.2,
-        stagger: 0.05,
-        ease: 'power2.in',
-      },
-      '-=0.2'
-    );
+  //   tl.to(
+  //     '.option-card',
+  //     {
+  //       opacity: 0,
+  //       y: 20,
+  //       scale: 0.95,
+  //       duration: 0.2,
+  //       stagger: 0.05,
+  //       ease: 'power2.in',
+  //     },
+  //     '-=0.2'
+  //   );
 
-    // Enter animation (after state update)
-    tl.call(() => {
-      // This will be called after exit animations complete
-    });
+  //   // Enter animation (after state update)
+  //   tl.call(() => {
+  //     // This will be called after exit animations complete
+  //   });
 
-    tl.fromTo(
-      questionRef.current,
-      { opacity: 0, x: direction === 'next' ? 50 : -50 },
-      { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }
-    );
+  //   tl.fromTo(
+  //     questionRef.current,
+  //     { opacity: 0, x: direction === 'next' ? 50 : -50 },
+  //     { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }
+  //   );
 
-    tl.fromTo(
-      '.option-card',
-      { opacity: 0, y: 40, scale: 0.9 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.4,
-        stagger: 0.08,
-        ease: 'back.out(1.2)',
-      },
-      '-=0.2'
-    );
+  //   tl.fromTo(
+  //     '.option-card',
+  //     { opacity: 0, y: 40, scale: 0.9 },
+  //     {
+  //       opacity: 1,
+  //       y: 0,
+  //       scale: 1,
+  //       duration: 0.4,
+  //       stagger: 0.08,
+  //       ease: 'back.out(1.2)',
+  //     },
+  //     '-=0.2'
+  //   );
 
-    return tl;
-  }, []);
+  //   return tl;
+  // }, []);
 
   // Handle option selection
   const handleOptionSelect = async (optionId: string) => {
@@ -337,7 +337,7 @@ export function ProgressiveOnboarding() {
             duration: 0.4,
             ease: 'power2.in',
             onComplete: () => {
-              router.push('/');
+              router.push('/dashboard');
             },
           });
         } else {
@@ -386,7 +386,7 @@ export function ProgressiveOnboarding() {
               Step {currentStep + 1} of {totalSteps}
             </span>
             <div ref={sparklesRef} className="flex items-center gap-1.5 text-amber-400">
-              <Sparkles className="w-4 h-4" />
+              <SparkleIcon className="w-4 h-4" weight="fill" />
               <span className="text-sm font-medium">Almost there!</span>
             </div>
           </div>
@@ -478,9 +478,9 @@ export function ProgressiveOnboarding() {
                         }`}
                     >
                       {isSelected ? (
-                        <Check className="w-5 h-5 text-white" />
+                        <CheckIcon className="w-5 h-5 text-white" weight="bold" />
                       ) : (
-                        <ArrowRight
+                        <ArrowRightIcon
                           className={`w-5 h-5 transition-all duration-300 ${isSelected ? 'text-white' : 'text-slate-500 group-hover:text-slate-300 group-hover:translate-x-0.5'
                             }`}
                         />

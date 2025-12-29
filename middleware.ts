@@ -65,7 +65,7 @@ export async function middleware(request: NextRequest) {
 
     // If user is on auth routes (sign-in/sign-up), redirect based on onboarding status
     if (isAuthRoute) {
-      const redirectUrl = !hasCompletedOnboarding ? "/onboarding" : "/";
+      const redirectUrl = !hasCompletedOnboarding ? "/onboarding" : "/dashboard";
       console.log(
         `[Middleware] Auth route detected, redirecting to: ${redirectUrl}`
       );
@@ -75,9 +75,9 @@ export async function middleware(request: NextRequest) {
     // If user is trying to access onboarding but has already completed it
     if (isOnboardingRoute && hasCompletedOnboarding) {
       console.log(
-        `[Middleware] Onboarding already completed, redirecting to home`
+        `[Middleware] Onboarding already completed, redirecting to dashboard`
       );
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 
     // If user hasn't completed onboarding and is trying to access protected routes

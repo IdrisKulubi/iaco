@@ -26,13 +26,20 @@ export async function GET() {
     const data = await response.json();
 
     // Filter for our popular cryptos
-    const filteredData = data.filter((item: any) => 
+    const filteredData = data.filter((item: { symbol: string }) =>
       POPULAR_CRYPTOS.includes(item.symbol)
     );
 
     console.log(`Found ${filteredData.length} matching cryptos out of ${data.length} total`);
 
-    const formattedData = filteredData.map((item: any) => ({
+    const formattedData = filteredData.map((item: {
+      symbol: string;
+      lastPrice: string;
+      priceChangePercent: string;
+      volume: string;
+      highPrice: string;
+      lowPrice: string;
+    }) => ({
       symbol: item.symbol.replace('USDT', ''),
       name: getCryptoName(item.symbol),
       price: parseFloat(item.lastPrice).toFixed(2),
@@ -42,7 +49,7 @@ export async function GET() {
       low24h: parseFloat(item.lowPrice).toFixed(2),
     }));
 
-    console.log('Returning crypto data:', formattedData.map(d => d.symbol));
+    console.log('Returning crypto data:', formattedData.map((d: { symbol: string }) => d.symbol));
     return NextResponse.json(formattedData);
   } catch (error) {
     console.error('Error fetching crypto prices:', error);

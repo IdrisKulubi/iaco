@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faRedditAlien, faYoutube, faDiscord, faFacebookF ,faTwitter,faLinkedinIn,faGoogle} from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faRedditAlien, faYoutube, faDiscord, faFacebookF ,faTwitter,faLinkedinIn} from '@fortawesome/free-brands-svg-icons';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 

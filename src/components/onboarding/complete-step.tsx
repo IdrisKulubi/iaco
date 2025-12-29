@@ -1,17 +1,17 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { 
-  CheckCircleIcon, 
-  TrendingUpIcon, 
-  MessageCircleIcon, 
+import {
+  CheckCircleIcon,
+  TrendingUpIcon,
+  MessageCircleIcon,
   ShieldCheckIcon,
   ArrowRightIcon,
   SparklesIcon
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
 export interface CompleteStepProps {
@@ -20,12 +20,9 @@ export interface CompleteStepProps {
 }
 
 export function CompleteStep({ onComplete, isLoading }: CompleteStepProps) {
-  const [showConfetti, setShowConfetti] = useState(false);
-
   useEffect(() => {
     // Trigger confetti on mount
     const timer = setTimeout(() => {
-      setShowConfetti(true);
       confetti({
         particleCount: 100,
         spread: 70,
@@ -61,7 +58,7 @@ export function CompleteStep({ onComplete, isLoading }: CompleteStepProps) {
     },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -71,7 +68,7 @@ export function CompleteStep({ onComplete, isLoading }: CompleteStepProps) {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -126,7 +123,7 @@ export function CompleteStep({ onComplete, isLoading }: CompleteStepProps) {
             variants={itemVariants}
             className="text-lg text-gray-700 dark:text-gray-300 max-w-md mx-auto"
           >
-            Your profile has been created successfully. You're ready to start your crypto learning journey.
+            Your profile has been created successfully. You&apos;re ready to start your crypto learning journey.
           </motion.p>
         </div>
       </motion.div>
@@ -190,7 +187,7 @@ export function CompleteStep({ onComplete, isLoading }: CompleteStepProps) {
               Remember: Education First
             </h4>
             <p className="text-sm text-blue-800 dark:text-blue-300 leading-relaxed">
-              This app is designed to help you learn about cryptocurrency. 
+              This app is designed to help you learn about cryptocurrency.
               All content is for educational purposes only and should not be considered financial advice.
             </p>
           </div>
@@ -236,7 +233,7 @@ export function CompleteStep({ onComplete, isLoading }: CompleteStepProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.0 }}
           >
-            • Portfolio connection is optional and can be done when you're ready
+            • Portfolio connection is optional and can be done when you&apos;re ready
           </motion.li>
           <motion.li
             initial={{ opacity: 0, x: -10 }}

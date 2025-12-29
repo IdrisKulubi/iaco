@@ -23,11 +23,11 @@ export async function POST(req: Request) {
   try {
     // Subtask 3.1: Authenticate user
     const session = await auth.api.getSession({ headers: req.headers });
-    
+
     if (!session?.user) {
       return new Response(
-        JSON.stringify({ error: 'Please sign in to use the chat assistant.' }), 
-        { 
+        JSON.stringify({ error: 'Please sign in to use the chat assistant.' }),
+        {
           status: 401,
           headers: { 'Content-Type': 'application/json' }
         }
@@ -41,8 +41,8 @@ export async function POST(req: Request) {
     } catch (parseError) {
       console.error('JSON parse error:', parseError);
       return new Response(
-        JSON.stringify({ error: 'Invalid request format.' }), 
-        { 
+        JSON.stringify({ error: 'Invalid request format.' }),
+        {
           status: 400,
           headers: { 'Content-Type': 'application/json' }
         }
@@ -50,11 +50,11 @@ export async function POST(req: Request) {
     }
 
     const { message } = body;
-    
+
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
       return new Response(
-        JSON.stringify({ error: 'Message cannot be empty.' }), 
-        { 
+        JSON.stringify({ error: 'Message cannot be empty.' }),
+        {
           status: 400,
           headers: { 'Content-Type': 'application/json' }
         }
@@ -67,7 +67,7 @@ export async function POST(req: Request) {
       const dbProfile = await db.query.userProfiles.findFirst({
         where: eq(userProfiles.userId, session.user.id),
       });
-      
+
       // Transform database profile to match expected UserProfile type
       if (dbProfile && dbProfile.investmentObjectives) {
         profile = {
@@ -119,8 +119,8 @@ export async function POST(req: Request) {
     } catch (dbError) {
       console.error('Error saving user message to database:', dbError);
       return new Response(
-        JSON.stringify({ error: 'Failed to save your message. Please try again.' }), 
-        { 
+        JSON.stringify({ error: 'Failed to save your message. Please try again.' }),
+        {
           status: 500,
           headers: { 'Content-Type': 'application/json' }
         }
@@ -136,85 +136,86 @@ export async function POST(req: Request) {
         messages: contextMessages,
         temperature: 0.7,
       });
-    } catch (aiError: any) {
+    } catch (aiError: unknown) {
       console.error('AI API error:', aiError);
-      
+
       // Subtask 3.5: Handle rate limit errors with retry-after
-      if (aiError?.status === 429 || aiError?.code === 'rate_limit_exceeded') {
+      const error = aiError as { status?: number; code?: string; message?: string };
+      if (error?.status === 429 || error?.code === 'rate_limit_exceeded') {
         return new Response(
-          JSON.stringify({ 
+          JSON.stringify({
             error: 'Too many requests. Please wait a moment and try again.',
-            retryAfter: 60 
-          }), 
+            retryAfter: 60
+          }),
           {
             status: 429,
-            headers: { 
+            headers: {
               'Content-Type': 'application/json',
-              'Retry-After': '60' 
+              'Retry-After': '60'
             },
           }
         );
       }
-      
+
       // Handle quota exceeded errors
-      if (aiError?.status === 402 || aiError?.code === 'insufficient_quota') {
+      if (error?.status === 402 || error?.code === 'insufficient_quota') {
         return new Response(
-          JSON.stringify({ 
-            error: 'Service temporarily unavailable. Please try again later.' 
-          }), 
+          JSON.stringify({
+            error: 'Service temporarily unavailable. Please try again later.'
+          }),
           {
             status: 503,
             headers: { 'Content-Type': 'application/json' }
           }
         );
       }
-      
+
       // Handle invalid API key or authentication errors
-      if (aiError?.status === 401 || aiError?.code === 'invalid_api_key') {
+      if (error?.status === 401 || error?.code === 'invalid_api_key') {
         console.error('AI API authentication error - check API key configuration');
         return new Response(
-          JSON.stringify({ 
-            error: 'Service configuration error. Please contact support.' 
-          }), 
+          JSON.stringify({
+            error: 'Service configuration error. Please contact support.'
+          }),
           {
             status: 503,
             headers: { 'Content-Type': 'application/json' }
           }
         );
       }
-      
+
       // Handle model not found or invalid model errors
-      if (aiError?.status === 404 || aiError?.code === 'model_not_found') {
+      if (error?.status === 404 || error?.code === 'model_not_found') {
         console.error('AI model not found - check model configuration');
         return new Response(
-          JSON.stringify({ 
-            error: 'Service configuration error. Please contact support.' 
-          }), 
+          JSON.stringify({
+            error: 'Service configuration error. Please contact support.'
+          }),
           {
             status: 503,
             headers: { 'Content-Type': 'application/json' }
           }
         );
       }
-      
+
       // Handle timeout errors
-      if (aiError?.code === 'timeout' || aiError?.message?.includes('timeout')) {
+      if (error?.code === 'timeout' || error?.message?.includes('timeout')) {
         return new Response(
-          JSON.stringify({ 
-            error: 'Request timed out. Please try again with a shorter message.' 
-          }), 
+          JSON.stringify({
+            error: 'Request timed out. Please try again with a shorter message.'
+          }),
           {
             status: 504,
             headers: { 'Content-Type': 'application/json' }
           }
         );
       }
-      
+
       // Generic AI API error
       return new Response(
-        JSON.stringify({ 
-          error: 'Unable to generate a response. Please try again.' 
-        }), 
+        JSON.stringify({
+          error: 'Unable to generate a response. Please try again.'
+        }),
         {
           status: 500,
           headers: { 'Content-Type': 'application/json' }
@@ -230,7 +231,7 @@ export async function POST(req: Request) {
         for await (const chunk of result.textStream) {
           fullResponse += chunk;
         }
-        
+
         // Save the complete response to database
         await db.insert(chatMessages).values({
           userId: session.user.id,
@@ -249,12 +250,12 @@ export async function POST(req: Request) {
   } catch (error) {
     // Subtask 3.5: Catch and log AI API errors
     console.error('Unexpected chat API error:', error);
-    
+
     // Subtask 3.5: Return user-friendly error messages
     return new Response(
-      JSON.stringify({ 
-        error: 'An unexpected error occurred. Please try again.' 
-      }), 
+      JSON.stringify({
+        error: 'An unexpected error occurred. Please try again.'
+      }),
       {
         status: 500,
         headers: { 'Content-Type': 'application/json' }

@@ -17,7 +17,7 @@ function WelcomeMessage() {
       <div className="max-w-md space-y-4">
         <h3 className="text-xl font-semibold">Welcome to CryptoCoach! 👋</h3>
         <p className="text-muted-foreground">
-          I'm here to help you learn about cryptocurrency and blockchain technology.
+          I&apos;m here to help you learn about cryptocurrency and blockchain technology.
           Ask me anything about crypto basics, wallets, exchanges, or trading concepts.
         </p>
         <div className="text-sm text-muted-foreground space-y-2">
@@ -25,7 +25,7 @@ function WelcomeMessage() {
           <ul className="space-y-1 text-left">
             <li>• What is cryptocurrency?</li>
             <li>• How do crypto wallets work?</li>
-            <li>• What's the difference between Bitcoin and Ethereum?</li>
+            <li>• What&apos;s the difference between Bitcoin and Ethereum?</li>
           </ul>
         </div>
       </div>
@@ -47,7 +47,6 @@ function TypingIndicator() {
 
 export function MessageList({ messages, isLoading, streamingContent }: MessageListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to latest message
   useEffect(() => {

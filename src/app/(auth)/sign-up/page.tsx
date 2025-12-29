@@ -61,7 +61,7 @@ export default function SignUpPage() {
                 htmlFor="terms"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-white"
               >
-                I agree to IACO's Terms and Conditions
+                I agree to IACO&apos;s Terms and Conditions
               </Label>
               <p className="text-xs text-gray-400">
                 By creating an account, you accept our{" "}

@@ -7,7 +7,7 @@
 /**
  * Server Action Response Type
  */
-export interface ActionResponse<T = any> {
+export interface ActionResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -114,7 +114,7 @@ export interface PortfolioSummary {
 export interface APIError {
   code: string;
   message: string;
-  details?: any;
+  details?: unknown;
   timestamp: Date;
   requestId: string;
 }

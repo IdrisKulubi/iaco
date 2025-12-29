@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { ProfileForm } from './profile-form';
 import { WelcomeStep } from './welcome-step';
 import { CompleteStep } from './complete-step';
@@ -238,7 +237,7 @@ export function OnboardingFlow({ onComplete, allowSkip = true }: OnboardingFlowP
               disabled={isLoading}
               className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all"
             >
-              Skip for now - I'll set this up later
+              Skip for now - I&apos;ll set this up later
             </Button>
           </motion.div>
         )}

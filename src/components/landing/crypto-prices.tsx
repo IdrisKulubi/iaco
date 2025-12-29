@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendUpIcon, TrendDownIcon } from '@phosphor-icons/react';
 import { Skeleton } from '@/components/ui/skeleton';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -77,18 +77,18 @@ export function CryptoPrices() {
           gsap.set(cardsRef.current?.children || [], { opacity: 1, y: 0 });
 
           // Simple fade-in animation without ScrollTrigger for now
-          gsap.fromTo(titleRef.current, 
+          gsap.fromTo(titleRef.current,
             { y: 50, opacity: 0 },
             { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
           );
 
-          gsap.fromTo(cardsRef.current?.children || [], 
+          gsap.fromTo(cardsRef.current?.children || [],
             { y: 60, opacity: 0 },
-            { 
-              y: 0, 
-              opacity: 1, 
-              duration: 0.6, 
-              stagger: 0.1, 
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
               ease: 'power3.out',
               delay: 0.3
             }
@@ -138,7 +138,7 @@ export function CryptoPrices() {
                     <span className="text-sm font-semibold">{crypto.symbol}</span>
                     <span className="text-sm opacity-80">${parseFloat(crypto.price).toLocaleString()}</span>
                     <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${isPositive ? 'bg-primary/10 text-primary' : 'bg-red-500/10 text-red-400'}`}>
-                      {isPositive ? <TrendingUp className="h-3 w-3"/> : <TrendingDown className="h-3 w-3"/>}
+                      {isPositive ? <TrendUpIcon className="h-3 w-3" /> : <TrendDownIcon className="h-3 w-3" />}
                       {Math.abs(parseFloat(crypto.change24h))}%
                     </span>
                   </div>
@@ -172,8 +172,8 @@ export function CryptoPrices() {
               // Use app primary color (approx RGB of oklch 0.64 0.15 198.6 ~ #06b6d4)
               const primaryRGB = '6, 182, 212';
               const bg = isPositive
-                ? `radial-gradient(1200px 300px at 0% 0%, rgba(${primaryRGB},${0.12 + intensity*0.2}) 0%, transparent 60%)`
-                : `radial-gradient(1200px 300px at 0% 0%, rgba(239,68,68,${0.12 + intensity*0.2}) 0%, transparent 60%)`;
+                ? `radial-gradient(1200px 300px at 0% 0%, rgba(${primaryRGB},${0.12 + intensity * 0.2}) 0%, transparent 60%)`
+                : `radial-gradient(1200px 300px at 0% 0%, rgba(239,68,68,${0.12 + intensity * 0.2}) 0%, transparent 60%)`;
               return (
                 <div key={crypto.symbol} className="relative rounded-2xl border border-white/10 bg-black/30 backdrop-blur p-4 sm:p-6 hover:-translate-y-1 transition-transform overflow-hidden">
                   <div className="pointer-events-none absolute inset-0" style={{ background: bg }} />
@@ -183,7 +183,7 @@ export function CryptoPrices() {
                       <p className="text-xl font-semibold tracking-tight">{crypto.symbol}</p>
                     </div>
                     <span className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${isPositive ? 'bg-primary/10 text-primary' : 'bg-red-500/10 text-red-400'}`}>
-                      {isPositive ? <TrendingUp className="h-3 w-3"/> : <TrendingDown className="h-3 w-3"/>}
+                      {isPositive ? <TrendUpIcon className="h-3 w-3" /> : <TrendDownIcon className="h-3 w-3" />}
                       {Math.abs(change)}%
                     </span>
                   </div>
@@ -212,7 +212,7 @@ export function CryptoPrices() {
 
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground">
-          Data provided by Binance • Updated in real-time
+            Data provided by Binance • Updated in real-time
           </p>
         </div>
       </div>
