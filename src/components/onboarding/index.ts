@@ -9,6 +9,7 @@ export { ProfileForm } from './profile-form';
 export { WelcomeStep } from './welcome-step';
 export { CompleteStep } from './complete-step';
 export { OnboardingPreview } from './onboarding-preview';
+export { ProgressiveOnboarding } from './progressive-onboarding';
 
 export type { OnboardingFlowProps } from './onboarding-flow';
 export type { ProfileFormProps } from './profile-form';
