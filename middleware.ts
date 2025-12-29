@@ -63,6 +63,15 @@ export async function middleware(request: NextRequest) {
       // On error, allow the request to proceed to avoid blocking users
     }
 
+    // If user is on landing page (/), redirect to onboarding or dashboard
+    if (pathname === "/") {
+      const redirectUrl = !hasCompletedOnboarding ? "/onboarding" : "/dashboard";
+      console.log(
+        `[Middleware] Landing page detected for auth user, redirecting to: ${redirectUrl}`
+      );
+      return NextResponse.redirect(new URL(redirectUrl, request.url));
+    }
+
     // If user is on auth routes (sign-in/sign-up), redirect based on onboarding status
     if (isAuthRoute) {
       const redirectUrl = !hasCompletedOnboarding ? "/onboarding" : "/dashboard";
@@ -104,6 +113,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/",
     "/dashboard/:path*",
     "/profile/:path*",
     "/portfolio/:path*",

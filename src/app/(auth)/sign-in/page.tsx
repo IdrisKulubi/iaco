@@ -11,7 +11,10 @@ export default function SignInPage() {
   const onGoogle = async () => {
     try {
       setLoading(true);
-      await authClient.signIn.social({ provider: "google" });
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/dashboard", // Redirect to dashboard after sign-in (middleware will handle onboarding check)
+      });
     } catch (e) {
       console.error(e);
       setLoading(false);

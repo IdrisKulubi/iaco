@@ -27,6 +27,7 @@ export default function SignUpPage() {
       setLoading(true);
       await authClient.signIn.social({
         provider: "google",
+        callbackURL: "/onboarding", // Force redirect to onboarding after signup
       });
     } catch (e) {
       console.error(e);
@@ -76,14 +77,13 @@ export default function SignUpPage() {
               </p>
             </div>
           </div>
-          
+
           <Button
             onClick={onGoogle}
-            className={`w-full h-11 rounded-xl transition ${
-              agreedToTerms
+            className={`w-full h-11 rounded-xl transition ${agreedToTerms
                 ? "bg-primary text-primary-foreground shadow-[0_10px_20px_-10px_var(--color-primary)] hover:opacity-90"
                 : "bg-gray-600 text-gray-400 cursor-not-allowed"
-            }`}
+              }`}
             disabled={loading || !agreedToTerms}
           >
             {loading ? "Redirecting…" : "Sign up with Google"}

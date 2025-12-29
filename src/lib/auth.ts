@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import  db from "@/db/drizzle";
+import db from "@/db/drizzle";
 import { users, session, account, verification } from "@/db/schema";
 
 export const auth = betterAuth({
@@ -45,7 +45,7 @@ export const auth = betterAuth({
 
       // Now check the onboarding status from the (potentially just created) profile.
       const finalStatus = await hasCompletedOnboarding(user.id);
-      return finalStatus.data ? "/" : "/onboarding";
+      return finalStatus.data ? "/dashboard" : "/onboarding";
     },
     signUp: "/onboarding", // Fallback for direct sign-ups
   },
