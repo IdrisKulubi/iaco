@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faRedditAlien, faYoutube, faDiscord, faFacebookF ,faTwitter,faLinkedinIn} from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faRedditAlien, faYoutube, faDiscord, faFacebookF, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,7 +20,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
-             
+
               <span className="text-xl font-bold  bg-clip-text text-primary ">
                 IACO
               </span>
@@ -31,7 +31,7 @@ export function Footer() {
               designed for beginners.
             </p>
             <div className="flex gap-3">
-             
+
               <a href="#" aria-label="Twitter" className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center">
                 <FontAwesomeIcon icon={faTwitter} className="w-4 h-4" />
               </a>
@@ -54,7 +54,7 @@ export function Footer() {
                 <FontAwesomeIcon icon={faFacebookF} className="w-4 h-4" />
               </a>
               <a
-                href="mailto:support@iaco.com"
+                href="mailto:contact@iaco.app"
                 aria-label="Email"
                 className="w-9 h-9 rounded-lg border bg-card hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all flex items-center justify-center"
               >
@@ -185,7 +185,7 @@ export function Footer() {
         <div className="pt-8 border-t">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground text-center md:text-left">
-              © {currentYear} IACO. All rights reserved. 
+              © {currentYear} IACO. All rights reserved.
             </p>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span>⚠️</span>

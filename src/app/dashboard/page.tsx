@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
 import { auth } from '@/lib/auth';
 import db from '@/db/drizzle';
-import { userProfiles } from '@/db/schema';
+import { userProfiles, users } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { DashboardContent } from './dashboard-content';
 
@@ -23,6 +23,16 @@ export default async function DashboardPage() {
         .where(eq(userProfiles.userId, session.user.id))
         .limit(1);
 
+    // Get fresh user data (name might have changed)
+    const userUser = await db.query.users.findFirst({
+        where: eq(users.id, session.user.id),
+        columns: {
+            name: true,
+            email: true,
+            image: true,
+        }
+    });
+
     const userProfile = profile[0] || null;
 
     // If no profile or onboarding not complete, redirect
@@ -34,9 +44,9 @@ export default async function DashboardPage() {
         <DashboardContent
             user={{
                 id: session.user.id,
-                name: session.user.name || 'Crypto Explorer',
-                email: session.user.email,
-                image: session.user.image || undefined,
+                name: userUser?.name || session.user.name || 'Crypto Explorer',
+                email: userUser?.email || session.user.email,
+                image: userUser?.image || session.user.image || undefined,
             }}
             profile={{
                 experienceLevel: userProfile.experienceLevel,

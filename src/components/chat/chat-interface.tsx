@@ -94,13 +94,13 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         const errorMessage = errorData.error || "Failed to send message. Please try again.";
-        
+
         // Subtask 6.3: Display toast notifications for errors
         toast.error(errorMessage);
-        
+
         // Remove optimistic message on error
         setMessages((prev) => prev.filter((msg) => msg.id !== optimisticMessage.id));
-        
+
         // Subtask 6.3: Provide retry option on failure
         toast.error(errorMessage, {
           action: {
@@ -110,7 +110,7 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
             },
           },
         });
-        
+
         return;
       }
 
@@ -123,6 +123,7 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
       }
 
       let accumulatedContent = "";
+      let buffer = "";
 
       // Subtask 6.2: Update UI progressively as text streams
       while (true) {
@@ -133,15 +134,35 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
         }
 
         const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split("\n");
+        buffer += chunk;
+        const lines = buffer.split("\n");
+
+        // Keep the last line in buffer if it doesn't end with newline (incomplete)
+        buffer = lines.pop() || "";
 
         for (const line of lines) {
           if (line.startsWith("0:")) {
             // Text chunk from AI SDK
-            const content = line.slice(2).replace(/^"(.*)"$/, "$1");
-            if (content) {
-              accumulatedContent += content;
-              setStreamingContent(accumulatedContent);
+            // AI SDK encodes quotes as ", so simple replace might be risking it.
+            // Using JSON.parse approach for safety if possible, or robust unquoting.
+            try {
+              // The format is 0:"string content"
+              // JSON.parse the string part
+              const jsonStr = line.substring(2);
+              if (jsonStr.startsWith('"') && jsonStr.endsWith('"')) {
+                const content = JSON.parse(jsonStr);
+                if (content) {
+                  accumulatedContent += content;
+                  setStreamingContent(accumulatedContent);
+                }
+              }
+            } catch (e) {
+              // Fallback manual parse if JSON parse fails (though 0:"..." should be valid JSON string)
+              const content = line.slice(2).replace(/^"(.*)"$/, "$1").replace(/\\"/g, '"').replace(/\\n/g, '\n');
+              if (content) {
+                accumulatedContent += content;
+                setStreamingContent(accumulatedContent);
+              }
             }
           }
         }
@@ -163,7 +184,7 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
       // Subtask 6.3: Handle partial responses from interrupted streams
       if (error instanceof Error && error.name === "AbortError") {
         toast.info("Message cancelled");
-        
+
         // If we have partial streaming content, save it
         if (streamingContent) {
           const partialMessage: Message = {
@@ -176,10 +197,10 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
         }
       } else {
         console.error("Chat submission error:", error);
-        
+
         // Remove optimistic message on error
         setMessages((prev) => prev.filter((msg) => msg.id !== optimisticMessage.id));
-        
+
         // Subtask 6.3: Display toast notifications for errors with retry
         toast.error("Failed to send message. Please try again.", {
           action: {
@@ -190,7 +211,7 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
           },
         });
       }
-      
+
       setStreamingContent("");
     } finally {
       setIsLoading(false);
@@ -217,9 +238,9 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
       <DisclaimerBanner />
 
       {/* Message List */}
-      <MessageList 
-        messages={messages} 
-        isLoading={isLoading} 
+      <MessageList
+        messages={messages}
+        isLoading={isLoading}
         streamingContent={streamingContent}
       />
 

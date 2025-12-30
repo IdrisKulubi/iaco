@@ -261,9 +261,13 @@ export function AccountContent({ user, profile }: AccountContentProps) {
                                         <Button
                                             variant="outline"
                                             className="border-slate-700 bg-slate-800/50 text-white hover:bg-slate-700/50 hover:text-white"
-                                            asChild
+                                            onClick={async () => {
+                                                const { authClient } = await import('@/lib/auth-client');
+                                                await authClient.signOut();
+                                                window.location.href = '/sign-in';
+                                            }}
                                         >
-                                            <Link href="/api/auth/signout">Sign Out</Link>
+                                            Sign Out
                                         </Button>
                                         <Button
                                             variant="ghost"

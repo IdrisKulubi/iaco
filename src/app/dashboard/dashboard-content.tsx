@@ -10,8 +10,6 @@ import {
     WalletIcon,
     TrendUpIcon,
     SparkleIcon,
-    GraduationCapIcon,
-    ShieldIcon,
     LightningIcon,
     ChartLineIcon,
     TargetIcon,
@@ -46,7 +44,8 @@ const quickActions = [
         description: 'Get instant answers to your crypto questions',
         icon: ChatCircleIcon,
         gradient: 'from-blue-500 to-cyan-500',
-        href: '#chat',
+        href: '#',
+        action: () => window.dispatchEvent(new Event('open-chat-dialog')),
     },
     {
         id: 'learn',
@@ -66,32 +65,7 @@ const quickActions = [
     },
 ];
 
-const learningModules = [
-    {
-        id: 'basics',
-        title: 'Crypto Basics',
-        lessons: 5,
-        duration: '15 min',
-        progress: 0,
-        icon: GraduationCapIcon,
-    },
-    {
-        id: 'wallets',
-        title: 'Understanding Wallets',
-        lessons: 4,
-        duration: '12 min',
-        progress: 0,
-        icon: WalletIcon,
-    },
-    {
-        id: 'security',
-        title: 'Staying Safe',
-        lessons: 6,
-        duration: '20 min',
-        progress: 0,
-        icon: ShieldIcon,
-    },
-];
+
 
 export function DashboardContent({ user, profile }: DashboardContentProps) {
     const router = useRouter();
@@ -277,7 +251,7 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                             <span className="text-xs text-slate-500">Your Goal</span>
                         </div>
                         <p className="text-2xl font-bold text-white mb-1 capitalize">
-                            {profile.objectives[0]?.replace('-', ' ') || 'Learning'}
+                            {profile.objectives[0]?.replace('defi', 'DeFi').replace('-', ' ') || 'Learning'}
                         </p>
                         <p className="text-sm text-slate-400">Focus area</p>
                     </div>
@@ -298,6 +272,12 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                                     <Link
                                         key={action.id}
                                         href={action.href}
+                                        onClick={(e) => {
+                                            if (action.action) {
+                                                e.preventDefault();
+                                                action.action();
+                                            }
+                                        }}
                                         className="action-card block group"
                                     >
                                         <div className="bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-slate-800/50 p-5 hover:border-slate-700 transition-all duration-300 hover:scale-[1.02]">
@@ -324,48 +304,37 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                     <div ref={learningRef}>
                         <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                             <BookOpenIcon className="w-5 h-5 text-purple-400" />
-                            Start Learning
+                            Daily Challenge
                         </h2>
-                        <div className="space-y-4">
-                            {learningModules.map((module) => {
-                                const Icon = module.icon;
-                                return (
-                                    <div
-                                        key={module.id}
-                                        className="learning-card bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-slate-800/50 p-5 hover:border-slate-700 transition-all duration-300 cursor-pointer group"
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <div className="p-3 rounded-xl bg-slate-800">
-                                                <Icon className="w-6 h-6 text-slate-300" />
-                                            </div>
-                                            <div className="flex-1">
-                                                <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
-                                                    {module.title}
-                                                </h3>
-                                                <div className="flex items-center gap-3 text-sm text-slate-400">
-                                                    <span>{module.lessons} lessons</span>
-                                                    <span>•</span>
-                                                    <span>{module.duration}</span>
-                                                </div>
-                                            </div>
-                                            <Button
-                                                variant="ghost"
-                                                size="icon"
-                                                className="bg-slate-800 hover:bg-slate-700 text-white"
-                                            >
-                                                <PlayIcon className="w-4 h-4" weight="fill" />
-                                            </Button>
-                                        </div>
-                                        {/* Progress bar */}
-                                        <div className="mt-4 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                                            <div
-                                                className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-500"
-                                                style={{ width: `${module.progress}%` }}
-                                            />
-                                        </div>
+                        <div className="learning-card bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-slate-800/50 p-5 hover:border-slate-700 transition-all duration-300 cursor-pointer group">
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 rounded-xl bg-slate-800">
+                                    <TargetIcon className="w-6 h-6 text-purple-400" />
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
+                                        Today&apos;s Challenge: Crypto Basics
+                                    </h3>
+                                    <div className="flex items-center gap-3 text-sm text-slate-400">
+                                        <span>5 min read</span>
+                                        <span>•</span>
+                                        <span>+50 XP</span>
                                     </div>
-                                );
-                            })}
+                                </div>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="bg-slate-800 hover:bg-slate-700 text-white"
+                                >
+                                    <PlayIcon className="w-4 h-4" weight="fill" />
+                                </Button>
+                            </div>
+                            {/* Progress bar */}
+                            <div className="mt-4 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                <div
+                                    className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full w-[0%]"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

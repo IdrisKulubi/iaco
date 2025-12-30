@@ -151,8 +151,8 @@ export function Hero() {
             ref={titleRef}
             className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight opacity-0"
           >
-            Your AI Crypto{" "}
-            <span className="text-primary">Learning Assistant</span>
+            The 21-Day Crypto{" "}
+            <span className="text-primary">Challenge</span>
           </h1>
 
           {/* Subtitle */}
@@ -160,8 +160,8 @@ export function Hero() {
             ref={subtitleRef}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed opacity-0"
           >
-            Master cryptocurrency with personalized AI guidance, real-time
-            portfolio tracking, and educational insights designed for beginners.
+            Join our guided 21-day program to master cryptocurrency. Get personalized daily
+            challenges, AI coaching, and real-time portfolio tracking.
           </p>
 
           {/* CTA Buttons */}
