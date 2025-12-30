@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { binanceCredentialsSchema, type BinanceCredentialsInput } from '@/lib/validations/account';
 import { saveBinanceCredentials, setBinanceActive, getBinanceStatus, deleteBinance } from '@/lib/actions/account';
+import { CheckCircleIcon, XCircleIcon, WarningIcon } from '@phosphor-icons/react';
 
 export default function BinanceKeysForm() {
   const [isPending, startTransition] = useTransition();
@@ -39,42 +40,122 @@ export default function BinanceKeysForm() {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="text-sm text-muted-foreground">
+    <div className="space-y-6">
+      {/* Connection Status */}
+      <div className={`flex items-center gap-3 p-4 rounded-xl border ${connected
+        ? active
+          ? 'border-emerald-200 bg-emerald-50 dark:border-emerald-900/50 dark:bg-emerald-950/20'
+          : 'border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20'
+        : 'border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50'
+        }`}>
         {connected ? (
-          <span>Connected to Binance. Status: {active ? 'Active' : 'Inactive'}</span>
+          active ? (
+            <>
+              <CheckCircleIcon className="w-6 h-6 text-emerald-400" weight="fill" />
+              <div>
+                <p className="text-white font-medium">Connected to Binance</p>
+                <p className="text-sm text-emerald-400">Portfolio tracking is active</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <WarningIcon className="w-6 h-6 text-amber-400" weight="fill" />
+              <div>
+                <p className="text-white font-medium">Connection Paused</p>
+                <p className="text-sm text-amber-400">Reconnect to resume tracking</p>
+              </div>
+            </>
+          )
         ) : (
-          <span>No Binance connection yet.</span>
+          <>
+            <XCircleIcon className="w-6 h-6 text-slate-400 dark:text-slate-500" />
+            <div>
+              <p className="text-slate-900 dark:text-slate-300 font-medium">Not Connected</p>
+              <p className="text-slate-500">Add your API keys to connect</p>
+            </div>
+          </>
         )}
       </div>
 
+      {/* API Keys Form */}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <Label htmlFor="apiKey">API Key</Label>
-            <Input id="apiKey" {...form.register('apiKey')} placeholder="Enter API Key" autoComplete="off" />
+          <div className="space-y-2">
+            <Label htmlFor="apiKey" className="text-slate-300">API Key</Label>
+            <Input
+              id="apiKey"
+              {...form.register('apiKey')}
+              placeholder="Enter API Key"
+              autoComplete="off"
+              className="bg-white dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-amber-500/50 focus:ring-amber-500/20"
+            />
           </div>
-          <div>
-            <Label htmlFor="apiSecret">API Secret</Label>
-            <Input id="apiSecret" type="password" {...form.register('apiSecret')} placeholder="Enter API Secret" autoComplete="off" />
+          <div className="space-y-2">
+            <Label htmlFor="apiSecret" className="text-slate-300">API Secret</Label>
+            <Input
+              id="apiSecret"
+              type="password"
+              {...form.register('apiSecret')}
+              placeholder="Enter API Secret"
+              autoComplete="off"
+              className="bg-white dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-amber-500/50 focus:ring-amber-500/20"
+            />
           </div>
         </div>
-        <div className="flex gap-2">
-          <Button type="submit" disabled={isPending}>Save</Button>
+
+        {/* Actions */}
+        <div className="flex flex-wrap gap-3 pt-2">
+          <Button
+            type="submit"
+            disabled={isPending}
+            className="bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-slate-200 text-white dark:text-slate-900 shadow-sm"
+          >
+            {isPending ? 'Saving...' : connected ? 'Update Keys' : 'Connect'}
+          </Button>
+
           {connected && (
             <>
-              <Button type="button" variant="outline" onClick={() => startTransition(async () => {
-                const res = await setBinanceActive(!active);
-                if (res.success) { setActive(!active); toast.success(res.message); } else toast.error(res.error || 'Failed');
-              })}>{active ? 'Disconnect' : 'Reconnect'}</Button>
-              <Button type="button" variant="destructive" onClick={() => startTransition(async () => {
-                const res = await deleteBinance();
-                if (res.success) { setConnected(false); setActive(false); toast.success(res.message); } else toast.error(res.error || 'Failed');
-              })}>Remove</Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="border-slate-700 bg-slate-800/50 text-white hover:bg-slate-700/50"
+                onClick={() => startTransition(async () => {
+                  const res = await setBinanceActive(!active);
+                  if (res.success) {
+                    setActive(!active);
+                    toast.success(res.message);
+                  } else toast.error(res.error || 'Failed');
+                })}
+              >
+                {active ? 'Pause' : 'Resume'}
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                onClick={() => startTransition(async () => {
+                  const res = await deleteBinance();
+                  if (res.success) {
+                    setConnected(false);
+                    setActive(false);
+                    toast.success(res.message);
+                  } else toast.error(res.error || 'Failed');
+                })}
+              >
+                Remove
+              </Button>
             </>
           )}
         </div>
       </form>
+
+      {/* Info Note */}
+      <div className="p-4 rounded-xl bg-slate-800/30 border border-slate-700/50">
+        <p className="text-sm text-slate-400">
+          <strong className="text-slate-300">Security Note:</strong> Your API keys are encrypted and stored securely.
+          We recommend using read-only API keys for portfolio tracking.
+        </p>
+      </div>
     </div>
   );
 }
