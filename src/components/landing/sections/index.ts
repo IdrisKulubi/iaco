@@ -1,0 +1,9 @@
+export { HeroSection } from './hero-section';
+export { YouHesitateSection } from './you-hesitate-section';
+export { WhatYouGetSection } from './what-you-get-section';
+export { HowItWorksSection } from './how-it-works-section';
+export { WhoWeAreSection } from './who-we-are-section';
+export { IacoAssistantSection } from './iaco-assistant-section';
+export { RefundSection } from './refund-section';
+export { SecuritySection } from './security-section';
+export { FinalCtaSection } from './final-cta-section';

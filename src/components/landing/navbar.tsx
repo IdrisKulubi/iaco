@@ -14,7 +14,7 @@ export function LandingNavbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            
+
             <span className="text-xl font-bold text-primary  ">
               IACO
             </span>
@@ -22,21 +22,21 @@ export function LandingNavbar() {
 
           {/* Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm font-medium hover:text-primary transition-colors">
-              Features
+            <a href="#how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
+              How It Works
             </a>
-            <a href="#prices" className="text-sm font-medium hover:text-primary transition-colors">
-              Live Prices
+            <a href="#who-we-are" className="text-sm font-medium hover:text-primary transition-colors">
+              About
             </a>
-            <a href="#faq" className="text-sm font-medium hover:text-primary transition-colors">
-              FAQ
+            <a href="#refund" className="text-sm font-medium hover:text-primary transition-colors">
+              Refund
             </a>
           </div>
 
           {/* Actions */}
           <div className="flex items-center gap-4">
             <ModeToggle />
-            
+
             {isPending ? (
               <div className="h-10 w-10 rounded-full bg-muted animate-pulse" />
             ) : session?.user ? (
