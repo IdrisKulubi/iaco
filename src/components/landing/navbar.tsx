@@ -29,7 +29,7 @@ export function LandingNavbar() {
               About
             </a>
             <a href="#refund" className="text-sm font-medium hover:text-primary transition-colors">
-              Refund
+              The Challenge
             </a>
           </div>
 
@@ -47,7 +47,7 @@ export function LandingNavbar() {
                   <Button variant="ghost" asChild>
                     <Link href="/sign-in">Sign In</Link>
                   </Button>
-                  <Button asChild>
+                  <Button variant="outline" asChild>
                     <Link href="/sign-up">Get Started</Link>
                   </Button>
                 </div>
