@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
@@ -12,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function FinalCtaSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const [showBetaModal, setShowBetaModal] = useState(false);
+    const t = useTranslations('finalCta');
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -36,7 +38,6 @@ export function FinalCtaSection() {
     }, []);
 
     const handleBetaClick = () => {
-        // Track click event
         if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag) {
             (window as unknown as { gtag: (...args: unknown[]) => void }).gtag('event', 'beta_signup_click', {
                 event_category: 'engagement',
@@ -51,35 +52,30 @@ export function FinalCtaSection() {
             <div className="container mx-auto px-4 lg:px-8">
                 <div className="final-cta-content max-w-3xl mx-auto">
                     <div className="text-center p-8 md:p-12 rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-background border border-primary/20 shadow-xl">
-                        {/* Icon */}
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
                             <RocketIcon className="w-8 h-8 text-primary" weight="fill" />
                         </div>
 
-                        {/* Title */}
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                            Ready to understand crypto{' '}
-                            <span className="text-primary">without stress</span>?
+                            {t('title')}{' '}
+                            <span className="text-primary">{t('titleHighlight')}</span>?
                         </h2>
 
-                        {/* Subtitle */}
                         <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-                            Sign up for the beta waiting list and be among the first to join the challenge.
+                            {t('subtitle')}
                         </p>
 
-                        {/* CTA Button */}
                         <Button
                             size="lg"
                             className="text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow group"
                             onClick={handleBetaClick}
                         >
-                            Join the Waiting List
+                            {t('cta')}
                             <ArrowRightIcon className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
 
-                        {/* Assurance */}
                         <p className="mt-6 text-sm text-muted-foreground">
-                            No spam. No commitment. Just early access.
+                            {t('assurance')}
                         </p>
                     </div>
                 </div>

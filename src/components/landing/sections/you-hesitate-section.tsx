@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -12,27 +13,16 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const painPoints = [
-    {
-        icon: CurrencyCircleDollarIcon,
-        text: "You're afraid of losing money",
-    },
-    {
-        icon: WarningCircleIcon,
-        text: "You're afraid of scams",
-    },
-    {
-        icon: QuestionIcon,
-        text: "Jargon makes everything confusing",
-    },
-    {
-        icon: ProhibitIcon,
-        text: "So you don't dare to take action",
-    },
+const painPointIcons = [
+    CurrencyCircleDollarIcon,
+    WarningCircleIcon,
+    QuestionIcon,
+    ProhibitIcon,
 ];
 
 export function YouHesitateSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const t = useTranslations('youHesitate');
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -106,6 +96,13 @@ export function YouHesitateSection() {
         return () => ctx.revert();
     }, []);
 
+    const painPoints = [
+        { key: 'money', icon: CurrencyCircleDollarIcon },
+        { key: 'scams', icon: WarningCircleIcon },
+        { key: 'jargon', icon: QuestionIcon },
+        { key: 'action', icon: ProhibitIcon },
+    ];
+
     return (
         <section
             ref={sectionRef}
@@ -115,13 +112,13 @@ export function YouHesitateSection() {
                 <div className="max-w-3xl mx-auto">
                     {/* Title */}
                     <h2 className="hesitate-title text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6">
-                        You find crypto interesting…{' '}
-                        <span className="text-muted-foreground">but you hesitate</span>
+                        {t('title')}{' '}
+                        <span className="text-muted-foreground">{t('titleHighlight')}</span>
                     </h2>
 
                     {/* Subtitle */}
                     <p className="hesitate-subtitle text-lg text-muted-foreground text-center mb-12">
-                        You see crypto everywhere and you&apos;d like to understand it. But…
+                        {t('subtitle')}
                     </p>
 
                     {/* Pain Points */}
@@ -136,7 +133,7 @@ export function YouHesitateSection() {
                                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
                                         <Icon className="w-6 h-6 text-red-500 dark:text-red-400" weight="fill" />
                                     </div>
-                                    <p className="text-lg font-medium">{point.text}</p>
+                                    <p className="text-lg font-medium">{t(`painPoints.${point.key}`)}</p>
                                 </div>
                             );
                         })}
@@ -145,11 +142,11 @@ export function YouHesitateSection() {
                     {/* Conclusion */}
                     <div className="hesitate-conclusion text-center p-6 rounded-2xl bg-primary/5 border border-primary/20">
                         <p className="text-lg text-muted-foreground">
-                            Not because you lack motivation, but because you lack{' '}
-                            <strong className="text-foreground">clear and reassuring guidance</strong>.
+                            {t('conclusion')}{' '}
+                            <strong className="text-foreground">{t('conclusionHighlight')}</strong>.
                         </p>
                         <p className="mt-4 text-xl font-semibold text-primary">
-                            ✨ This challenge exists for that reason.
+                            {t('reason')}
                         </p>
                     </div>
                 </div>

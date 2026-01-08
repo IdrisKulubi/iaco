@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
@@ -14,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function HeroSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const [showBetaModal, setShowBetaModal] = useState(false);
+    const t = useTranslations('hero');
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -103,22 +105,21 @@ export function HeroSection() {
                                 variant="outline"
                                 className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border-primary/30 bg-primary/5"
                             >
-                                21-Day Challenge
+                                {t('badge')}
                             </Badge>
                         </div>
 
                         {/* Headline */}
                         <h1 className="hero-headline text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-                            Understand crypto in{' '}
-                            <span className="text-primary">21 days</span>.
+                            {t('headline')}{' '}
+                            <span className="text-primary">{t('headlineDays')}</span>.
                             <br />
-                            <span className="text-muted-foreground text-3xl sm:text-4xl lg:text-5xl font-medium">No jargon. No stress.</span>
+                            <span className="text-muted-foreground text-3xl sm:text-4xl lg:text-5xl font-medium">{t('subheadline')}</span>
                         </h1>
 
                         {/* Subtitle - Darker text, medium weight */}
                         <p className="hero-subtitle text-lg md:text-xl text-foreground/70 font-medium leading-relaxed mb-8 max-w-xl">
-                            Master the basics, spot the scams, and invest with confidence—guided by{' '}
-                            <strong className="text-foreground">Iaco</strong>, your personal AI coach.
+                            {t('subtitle', { assistant: 'Iaco' })}
                         </p>
 
                         {/* CTA */}
@@ -128,14 +129,14 @@ export function HeroSection() {
                                 className="text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-shadow"
                                 onClick={handleBetaClick}
                             >
-                                Join the Beta Waiting List
+                                {t('cta')}
                             </Button>
                         </div>
 
                         {/* Trust Signal - Below button */}
                         <div className="hero-trust inline-flex items-center gap-2 text-sm text-muted-foreground">
                             <ShieldCheckIcon className="w-5 h-5 text-emerald-500" weight="fill" />
-                            <span className="font-medium">Refunded if you succeed in the challenge</span>
+                            <span className="font-medium">{t('trust')}</span>
                         </div>
                     </div>
 
@@ -143,7 +144,7 @@ export function HeroSection() {
                     <div className="hero-mockup relative flex justify-center lg:justify-end">
                         {/* Hero image with floating animation */}
                         <Image
-                            src="/images/image.png"
+                            src="/images/newhero.png"
                             alt="Iaco AI Assistant App"
                             width={500}
                             height={500}
@@ -153,18 +154,18 @@ export function HeroSection() {
 
                         {/* Floating animation keyframes */}
                         <style jsx>{`
-                            @keyframes float {
-                                0%, 100% {
-                                    transform: translateY(0px);
-                                }
-                                50% {
-                                    transform: translateY(-12px);
-                                }
-                            }
-                            :global(.animate-float) {
-                                animation: float 3.5s ease-in-out infinite;
-                            }
-                        `}</style>
+              @keyframes float {
+                0%, 100% {
+                  transform: translateY(0px);
+                }
+                50% {
+                  transform: translateY(-12px);
+                }
+              }
+              :global(.animate-float) {
+                animation: float 3.5s ease-in-out infinite;
+              }
+            `}</style>
                     </div>
                 </div>
             </div>

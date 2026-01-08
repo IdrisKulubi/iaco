@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import {
     Dialog,
     DialogContent,
@@ -17,6 +17,8 @@ interface BetaModalProps {
 }
 
 export function BetaModal({ open, onOpenChange }: BetaModalProps) {
+    const t = useTranslations('betaModal');
+
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-md text-center">
@@ -25,17 +27,15 @@ export function BetaModal({ open, onOpenChange }: BetaModalProps) {
                         <ClockIcon className="w-8 h-8 text-amber-600 dark:text-amber-400" weight="fill" />
                     </div>
                     <DialogTitle className="text-2xl font-bold">
-                        Oops… not available yet
+                        {t('title')}
                     </DialogTitle>
                     <DialogDescription className="text-base text-muted-foreground mt-2">
-                        The waiting list is not open yet.
-                        <br />
-                        We are finalizing the last details before the beta launch.
+                        {t('description')}
                     </DialogDescription>
                 </DialogHeader>
                 <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20">
                     <p className="text-sm font-medium text-primary">
-                        🚀 Come back very soon, the challenge is coming.
+                        {t('message')}
                     </p>
                 </div>
                 <Button
@@ -43,7 +43,7 @@ export function BetaModal({ open, onOpenChange }: BetaModalProps) {
                     className="mt-4 w-full"
                     variant="outline"
                 >
-                    Got it
+                    {t('button')}
                 </Button>
             </DialogContent>
         </Dialog>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -13,36 +14,12 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const benefits = [
-    {
-        icon: RocketIcon,
-        title: 'Move forward step by step',
-        description: 'For 21 days, you progress at your own pace to finally understand crypto without feeling lost.',
-    },
-    {
-        icon: BookOpenIcon,
-        title: 'Clear, accessible explanations',
-        description: 'Discover how the ecosystem really works, with no unnecessary jargon.',
-    },
-    {
-        icon: ShieldCheckIcon,
-        title: 'Identify real risks',
-        description: 'Learn to avoid the most common scams and stop making classic mistakes.',
-    },
-    {
-        icon: ChatCircleIcon,
-        title: 'Iaco supports you',
-        description: 'Your AI assistant answers your questions, guides you when you hesitate, and helps you move forward without stress.',
-    },
-    {
-        icon: TrophyIcon,
-        title: 'Confidence, not expertise',
-        description: 'At the end of the 21 days, you know what you\'re doing, why you\'re doing it, and how to move forward.',
-    },
-];
+const benefitIcons = [RocketIcon, BookOpenIcon, ShieldCheckIcon, ChatCircleIcon, TrophyIcon];
+const benefitKeys = ['stepByStep', 'clear', 'risks', 'support', 'confidence'];
 
 export function WhatYouGetSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const t = useTranslations('whatYouGet');
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -87,29 +64,27 @@ export function WhatYouGetSection() {
         <section ref={sectionRef} className="py-24 md:py-32">
             <div className="container mx-auto px-4 lg:px-8">
                 <div className="max-w-5xl mx-auto">
-                    {/* Title */}
                     <div className="text-center mb-16">
                         <h2 className="wyg-title text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                            What you get with the{' '}
-                            <span className="text-primary">21-day challenge</span>
+                            {t('title')}{' '}
+                            <span className="text-primary">{t('titleHighlight')}</span>
                         </h2>
                     </div>
 
-                    {/* Benefits Grid */}
                     <div className="benefits-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {benefits.map((benefit, index) => {
-                            const Icon = benefit.icon;
+                        {benefitKeys.map((key, index) => {
+                            const Icon = benefitIcons[index];
                             return (
                                 <div
-                                    key={index}
+                                    key={key}
                                     className="benefit-card p-6 rounded-2xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow"
                                 >
                                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                                         <Icon className="w-6 h-6 text-primary" weight="fill" />
                                     </div>
-                                    <h3 className="text-lg font-semibold mb-2">{benefit.title}</h3>
+                                    <h3 className="text-lg font-semibold mb-2">{t(`benefits.${key}.title`)}</h3>
                                     <p className="text-muted-foreground text-sm leading-relaxed">
-                                        {benefit.description}
+                                        {t(`benefits.${key}.description`)}
                                     </p>
                                 </div>
                             );
