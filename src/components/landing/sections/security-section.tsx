@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -13,31 +14,12 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const trustPoints = [
-    {
-        icon: ProhibitIcon,
-        title: 'No investment advice',
-        description: 'Iaco is 100% educational. We help you understand crypto, not tell you what to buy.',
-    },
-    {
-        icon: LockKeyIcon,
-        title: 'No private keys requested',
-        description: 'No seed phrase, no access to your accounts or your money.',
-    },
-    {
-        icon: EyeSlashIcon,
-        title: 'Your data stays private',
-        description: 'We don\'t share or sell your information. Ever.',
-    },
-    {
-        icon: CheckCircleIcon,
-        title: 'Full control',
-        description: 'Move at your own pace and stop at any time.',
-    },
-];
+const trustIcons = [ProhibitIcon, LockKeyIcon, EyeSlashIcon, CheckCircleIcon];
+const trustKeys = ['noAdvice', 'noKeys', 'private', 'control'];
 
 export function SecuritySection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const t = useTranslations('security');
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -101,23 +83,21 @@ export function SecuritySection() {
         >
             <div className="container mx-auto px-4 lg:px-8">
                 <div className="max-w-5xl mx-auto">
-                    {/* Title */}
                     <div className="text-center mb-12">
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-6">
                             <ShieldIcon className="w-8 h-8 text-blue-600 dark:text-blue-400" weight="fill" />
                         </div>
                         <h2 className="security-title text-3xl md:text-4xl lg:text-5xl font-bold">
-                            Security, trust &amp; compliance
+                            {t('title')}
                         </h2>
                     </div>
 
-                    {/* Trust Points Grid */}
                     <div className="trust-grid grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                        {trustPoints.map((point, index) => {
-                            const Icon = point.icon;
+                        {trustKeys.map((key, index) => {
+                            const Icon = trustIcons[index];
                             return (
                                 <div
-                                    key={index}
+                                    key={key}
                                     className="trust-card p-6 rounded-2xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm"
                                 >
                                     <div className="flex items-start gap-4">
@@ -125,8 +105,8 @@ export function SecuritySection() {
                                             <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" weight="fill" />
                                         </div>
                                         <div>
-                                            <h3 className="text-lg font-semibold mb-1">{point.title}</h3>
-                                            <p className="text-muted-foreground text-sm">{point.description}</p>
+                                            <h3 className="text-lg font-semibold mb-1">{t(`points.${key}.title`)}</h3>
+                                            <p className="text-muted-foreground text-sm">{t(`points.${key}.description`)}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -134,11 +114,10 @@ export function SecuritySection() {
                         })}
                     </div>
 
-                    {/* Conclusion */}
                     <div className="security-conclusion text-center p-6 rounded-2xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
                         <p className="text-lg text-muted-foreground">
-                            No unrealistic promises, no &quot;easy money&quot;,{' '}
-                            <strong className="text-foreground">just clear, honest, and transparent guidance</strong>.
+                            {t('conclusion')}{' '}
+                            <strong className="text-foreground">{t('conclusionHighlight')}</strong>.
                         </p>
                     </div>
                 </div>

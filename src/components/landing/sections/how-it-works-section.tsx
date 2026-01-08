@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -13,35 +14,16 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const steps = [
-    {
-        icon: NumberCircleOneIcon,
-        title: 'Sign up for the challenge',
-        description: 'Join and move forward over 21 days, step by step.',
-    },
-    {
-        icon: NumberCircleTwoIcon,
-        title: 'One concept per day',
-        description: 'Each day, discover one essential concept explained simply, without unnecessary jargon.',
-    },
-    {
-        icon: NumberCircleThreeIcon,
-        title: 'Iaco supports you',
-        bullets: [
-            'It answers your questions',
-            'It helps you when you doubt',
-            'It explains things differently if needed',
-        ],
-    },
-    {
-        icon: NumberCircleFourIcon,
-        title: 'Build solid foundations',
-        description: 'Day after day: better understanding, better protection, avoiding common mistakes.',
-    },
+const stepIcons = [
+    NumberCircleOneIcon,
+    NumberCircleTwoIcon,
+    NumberCircleThreeIcon,
+    NumberCircleFourIcon,
 ];
 
 export function HowItWorksSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const t = useTranslations('howItWorks');
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -98,6 +80,13 @@ export function HowItWorksSection() {
         return () => ctx.revert();
     }, []);
 
+    const steps = [
+        { key: 'signup', hasBullets: false },
+        { key: 'daily', hasBullets: false },
+        { key: 'support', hasBullets: true },
+        { key: 'foundations', hasBullets: false },
+    ];
+
     return (
         <section
             ref={sectionRef}
@@ -106,34 +95,32 @@ export function HowItWorksSection() {
         >
             <div className="container mx-auto px-4 lg:px-8">
                 <div className="max-w-4xl mx-auto">
-                    {/* Title */}
                     <h2 className="hiw-title text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-16">
-                        How it works
+                        {t('title')}
                     </h2>
 
-                    {/* Steps */}
                     <div className="steps-container space-y-6">
                         {steps.map((step, index) => {
-                            const Icon = step.icon;
+                            const Icon = stepIcons[index];
                             return (
                                 <div
-                                    key={index}
+                                    key={step.key}
                                     className="step-card flex items-start gap-4 p-6 rounded-2xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm"
                                 >
                                     <div className="flex-shrink-0">
                                         <Icon className="w-10 h-10 text-primary" weight="fill" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                                        {step.description && (
-                                            <p className="text-muted-foreground">{step.description}</p>
+                                        <h3 className="text-xl font-semibold mb-2">{t(`steps.${step.key}.title`)}</h3>
+                                        {!step.hasBullets && (
+                                            <p className="text-muted-foreground">{t(`steps.${step.key}.description`)}</p>
                                         )}
-                                        {step.bullets && (
+                                        {step.hasBullets && (
                                             <ul className="space-y-2 mt-2">
-                                                {step.bullets.map((bullet, i) => (
-                                                    <li key={i} className="flex items-center gap-2 text-muted-foreground">
+                                                {['answers', 'helps', 'explains'].map((bullet) => (
+                                                    <li key={bullet} className="flex items-center gap-2 text-muted-foreground">
                                                         <CheckCircleIcon className="w-5 h-5 text-primary flex-shrink-0" weight="fill" />
-                                                        {bullet}
+                                                        {t(`steps.${step.key}.bullets.${bullet}`)}
                                                     </li>
                                                 ))}
                                             </ul>
@@ -144,11 +131,10 @@ export function HowItWorksSection() {
                         })}
                     </div>
 
-                    {/* Conclusion */}
                     <div className="hiw-conclusion mt-12 text-center p-6 rounded-2xl bg-primary/5 border border-primary/20">
                         <p className="text-lg">
-                            At the end of the challenge, you know where you stand,{' '}
-                            <strong>without stress or pressure</strong>.
+                            {t('conclusion', { emphasis: '' })}
+                            <strong>{t('conclusionEmphasis')}</strong>.
                         </p>
                     </div>
                 </div>

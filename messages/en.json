@@ -1,0 +1,348 @@
+{
+    "common": {
+        "appName": "IACO",
+        "getStarted": "Get Started",
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "learnMore": "Learn More",
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "success": "Success",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "back": "Back",
+        "next": "Next",
+        "submit": "Submit",
+        "close": "Close"
+    },
+    "nav": {
+        "howItWorks": "How It Works",
+        "about": "About",
+        "theChallenge": "The Challenge"
+    },
+    "hero": {
+        "badge": "21-Day Challenge",
+        "headline": "Understand crypto in",
+        "headlineDays": "21 days",
+        "subheadline": "No jargon. No stress.",
+        "subtitle": "Master the basics, spot the scams, and invest with confidence guided by {assistant}, your personal AI coach.",
+        "cta": "Join the Beta Waiting List",
+        "trust": "Refunded if you succeed in the challenge"
+    },
+    "youHesitate": {
+        "title": "You find crypto interesting…",
+        "titleHighlight": "but you hesitate",
+        "subtitle": "You see crypto everywhere and you'd like to understand it. But…",
+        "painPoints": {
+            "money": "You're afraid of losing money",
+            "scams": "You're afraid of scams",
+            "jargon": "Jargon makes everything confusing",
+            "action": "So you don't dare to take action"
+        },
+        "conclusion": "Not because you lack motivation, but because you lack",
+        "conclusionHighlight": "clear and reassuring guidance",
+        "reason": "✨ This challenge exists for that reason."
+    },
+    "whatYouGet": {
+        "title": "What you get with the",
+        "titleHighlight": "21-day challenge",
+        "benefits": {
+            "stepByStep": {
+                "title": "Move forward step by step",
+                "description": "For 21 days, you progress at your own pace to finally understand crypto without feeling lost."
+            },
+            "clear": {
+                "title": "Clear, accessible explanations",
+                "description": "Discover how the ecosystem really works, with no unnecessary jargon."
+            },
+            "risks": {
+                "title": "Identify real risks",
+                "description": "Learn to avoid the most common scams and stop making classic mistakes."
+            },
+            "support": {
+                "title": "Iaco supports you",
+                "description": "Your AI assistant answers your questions, guides you when you hesitate, and helps you move forward without stress."
+            },
+            "confidence": {
+                "title": "Confidence, not expertise",
+                "description": "At the end of the 21 days, you know what you're doing, why you're doing it, and how to move forward."
+            }
+        }
+    },
+    "howItWorks": {
+        "title": "How it works",
+        "steps": {
+            "signup": {
+                "title": "Sign up for the challenge",
+                "description": "Join and move forward over 21 days, step by step."
+            },
+            "daily": {
+                "title": "One concept per day",
+                "description": "Each day, discover one essential concept explained simply, without unnecessary jargon."
+            },
+            "support": {
+                "title": "Iaco supports you",
+                "bullets": {
+                    "answers": "It answers your questions",
+                    "helps": "It helps you when you doubt",
+                    "explains": "It explains things differently if needed"
+                }
+            },
+            "foundations": {
+                "title": "Build solid foundations",
+                "description": "Day after day: better understanding, better protection, avoiding common mistakes."
+            }
+        },
+        "conclusion": "At the end of the challenge, you know where you stand, {emphasis}.",
+        "conclusionEmphasis": "without stress or pressure"
+    },
+    "whoWeAre": {
+        "title": "Who we are",
+        "story1": {
+            "text": "It all started with a very simple search. One day, our founder typed:",
+            "search": "\"how to invest in crypto?\"",
+            "continuation": "She found videos, courses, tutorials everywhere. But when it came time to take action, something was missing: clear explanations, without jargon, and above all",
+            "highlight": "real guidance"
+        },
+        "story2": {
+            "text": "Too much complexity, too much fear of making a mistake, too much pressure. That's when she understood one essential thing:",
+            "highlight": "The real problem is not a lack of information, but a lack of guidance."
+        },
+        "story3": {
+            "text": "She then decided to create the tool she would have wanted herself. A",
+            "highlight": "simple, caring guide",
+            "continuation": "that explains without judging and supports step by step.",
+            "birth": "With a developer sharing the same vision,",
+            "iacoName": "Iaco",
+            "birthEnd": "was born. An intelligent assistant designed to make crypto more understandable, more human, and accessible to those who want to move forward with confidence."
+        }
+    },
+    "iacoAssistant": {
+        "title": "Iaco, your AI assistant",
+        "intro": "Iaco is here to help you understand crypto, simply. Throughout the entire challenge, it supports you step by step.",
+        "features": {
+            "answers": {
+                "title": "Answers your questions",
+                "description": "Explains without jargon and helps you move forward without stress."
+            },
+            "neverAlone": {
+                "title": "You are never alone",
+                "description": "Learn at your own pace, without pressure or judgment."
+            },
+            "noAccess": {
+                "title": "No access to your money",
+                "description": "Iaco has no access to your funds and gives no investment advice."
+            },
+            "guidance": {
+                "title": "Just guidance",
+                "description": "An intelligent assistant to understand, avoid mistakes, and move forward with confidence."
+            }
+        }
+    },
+    "refund": {
+        "title": "Refund conditions",
+        "promise": "Our promise is simple: if you succeed in the challenge, you can be refunded.",
+        "criteria": {
+            "intro": "To validate success, you simply need to meet these objective conditions:",
+            "lessons": "90% of lessons completed",
+            "quiz": "At least 80% on the final quiz",
+            "alerts": "2 alerts activated"
+        },
+        "conclusion": "If these criteria are met, you can request your refund,",
+        "conclusionHighlight": "with no unnecessary discussion",
+        "reason": "This guarantee exists for one reason only: to allow you to learn without pressure, with a clear and transparent framework."
+    },
+    "security": {
+        "title": "Security, trust & compliance",
+        "points": {
+            "noAdvice": {
+                "title": "No investment advice",
+                "description": "Iaco is 100% educational. We help you understand crypto, not tell you what to buy."
+            },
+            "noKeys": {
+                "title": "No private keys requested",
+                "description": "No seed phrase, no access to your accounts or your money."
+            },
+            "private": {
+                "title": "Your data stays private",
+                "description": "We don't share or sell your information. Ever."
+            },
+            "control": {
+                "title": "Full control",
+                "description": "Move at your own pace and stop at any time."
+            }
+        },
+        "conclusion": "No unrealistic promises, no \"easy money\",",
+        "conclusionHighlight": "just clear, honest, and transparent guidance"
+    },
+    "finalCta": {
+        "title": "Ready to understand crypto",
+        "titleHighlight": "without stress",
+        "subtitle": "Sign up for the beta waiting list and be among the first to join the challenge.",
+        "cta": "Join the Waiting List",
+        "assurance": "No spam. No commitment. Just early access."
+    },
+    "betaModal": {
+        "title": "Oops… not available yet",
+        "description": "The waiting list is not open yet. We are finalizing the last details before the beta launch.",
+        "message": "🚀 Come back very soon, the challenge is coming.",
+        "button": "Got it"
+    },
+    "footer": {
+        "description": "Your AI-powered crypto learning assistant. Master cryptocurrency with personalized guidance, real-time portfolio tracking, and educational insights designed for beginners.",
+        "product": "Product",
+        "features": "Features",
+        "livePrices": "Live Prices",
+        "faq": "FAQ",
+        "resources": "Resources",
+        "documentation": "Documentation",
+        "learningCenter": "Learning Center",
+        "apiReference": "API Reference",
+        "community": "Community",
+        "legal": "Legal",
+        "privacyPolicy": "Privacy Policy",
+        "termsOfService": "Terms of Service",
+        "cookiePolicy": "Cookie Policy",
+        "disclaimer": "Disclaimer",
+        "copyright": "© {year} IACO. All rights reserved.",
+        "educationalNotice": "Educational purposes only. Not financial advice. Always DYOR."
+    },
+    "dashboard": {
+        "greeting": {
+            "morning": "Good morning",
+            "afternoon": "Good afternoon",
+            "evening": "Good evening"
+        },
+        "welcome": "Ready to continue your crypto learning journey?",
+        "experienceLevel": {
+            "beginner": "Beginner",
+            "intermediate": "Intermediate"
+        },
+        "explorer": "Explorer",
+        "stats": {
+            "portfolio": "Portfolio",
+            "notConnected": "Not Connected",
+            "connectBinance": "Connect Binance to track",
+            "progress": "Progress",
+            "startLearning": "Start learning below",
+            "yourGoal": "Your Goal",
+            "focusArea": "Focus area"
+        },
+        "quickActions": {
+            "title": "Quick Actions",
+            "askAI": {
+                "title": "Ask AI Coach",
+                "description": "Get instant answers to your crypto questions"
+            },
+            "startLearning": {
+                "title": "Start Learning",
+                "description": "Watch beginner-friendly tutorials"
+            },
+            "connectBinance": {
+                "title": "Connect Binance",
+                "description": "Track your portfolio in real-time"
+            }
+        },
+        "dailyChallenge": {
+            "title": "Daily Challenge",
+            "todaysChallenge": "Today's Challenge: Crypto Basics",
+            "duration": "5 min read",
+            "xp": "+50 XP"
+        },
+        "educationalBanner": {
+            "title": "📚 Remember: Education First",
+            "description": "This app is designed to help you learn about cryptocurrency. All content is for educational purposes only and should not be considered financial advice. Always do your own research before making any investment decisions."
+        }
+    },
+    "account": {
+        "title": "Account Settings",
+        "subtitle": "Manage your profile, preferences, and security settings",
+        "sections": {
+            "profile": "Profile",
+            "preferences": "Preferences",
+            "binance": "Binance",
+            "security": "Security"
+        },
+        "profile": {
+            "title": "Personal Information",
+            "description": "Update your name and contact details",
+            "name": "Full Name",
+            "email": "Email Address",
+            "phone": "Phone Number"
+        },
+        "preferences": {
+            "title": "Learning Preferences",
+            "description": "Customize your learning experience",
+            "experienceLevel": "Experience Level",
+            "interests": "Interests",
+            "riskTolerance": "Risk Tolerance"
+        },
+        "binance": {
+            "title": "Binance Integration",
+            "description": "Connect your Binance account for portfolio tracking",
+            "status": {
+                "connected": "Connected",
+                "paused": "Paused",
+                "notConnected": "Not Connected"
+            }
+        },
+        "security": {
+            "title": "Security",
+            "description": "Manage your account security"
+        }
+    },
+    "onboarding": {
+        "welcome": {
+            "title": "Welcome to IACO",
+            "subtitle": "Your personal AI crypto learning assistant",
+            "cta": "Let's Get Started"
+        },
+        "experience": {
+            "title": "What's your experience with crypto?",
+            "beginner": "Beginner",
+            "beginnerDesc": "I'm new to cryptocurrency",
+            "intermediate": "Intermediate",
+            "intermediateDesc": "I know the basics",
+            "advanced": "Advanced",
+            "advancedDesc": "I'm experienced with crypto"
+        },
+        "goals": {
+            "title": "What are your goals?",
+            "learning": "Learning",
+            "investing": "Investing",
+            "trading": "Trading",
+            "defi": "DeFi",
+            "nfts": "NFTs"
+        },
+        "complete": {
+            "title": "You're all set!",
+            "subtitle": "Your personalized learning journey is ready",
+            "cta": "Go to Dashboard"
+        }
+    },
+    "chat": {
+        "title": "CryptoCoach",
+        "disclaimer": "This is an AI assistant for educational purposes only. Not financial advice.",
+        "placeholder": "Ask me anything about crypto...",
+        "send": "Send",
+        "retry": "Retry"
+    },
+    "auth": {
+        "signIn": {
+            "title": "Welcome back",
+            "subtitle": "Sign in to continue your crypto learning journey",
+            "google": "Continue with Google",
+            "noAccount": "Don't have an account?",
+            "signUp": "Sign up"
+        },
+        "signUp": {
+            "title": "Create your account",
+            "subtitle": "Start your 21-day crypto learning challenge",
+            "google": "Continue with Google",
+            "hasAccount": "Already have an account?",
+            "signIn": "Sign in"
+        }
+    }
+}

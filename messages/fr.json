@@ -1,0 +1,348 @@
+{
+    "common": {
+        "appName": "IACO",
+        "getStarted": "Commencer",
+        "signIn": "Connexion",
+        "signOut": "Déconnexion",
+        "learnMore": "En savoir plus",
+        "loading": "Chargement...",
+        "error": "Une erreur est survenue",
+        "success": "Succès",
+        "cancel": "Annuler",
+        "save": "Enregistrer",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "back": "Retour",
+        "next": "Suivant",
+        "submit": "Soumettre",
+        "close": "Fermer"
+    },
+    "nav": {
+        "howItWorks": "Comment ça marche",
+        "about": "À propos",
+        "theChallenge": "Le Défi"
+    },
+    "hero": {
+        "badge": "Défi 21 Jours",
+        "headline": "Comprends les cryptos en",
+        "headlineDays": "21 jours",
+        "subheadline": "Sans jargon. Sans stress.",
+        "subtitle": "Maîtrise les bases, repère les arnaques et investis en confiance  accompagné par {assistant}, ton coach IA personnel.",
+        "cta": "Rejoindre la liste d'attente bêta",
+        "trust": "Remboursé si tu réussis le défi"
+    },
+    "youHesitate": {
+        "title": "Tu trouves les cryptos intéressantes…",
+        "titleHighlight": "mais tu hésites",
+        "subtitle": "Tu vois les cryptos partout et tu aimerais comprendre. Mais…",
+        "painPoints": {
+            "money": "Tu as peur de perdre de l'argent",
+            "scams": "Tu as peur des arnaques",
+            "jargon": "Le jargon rend tout confus",
+            "action": "Alors tu n'oses pas passer à l'action"
+        },
+        "conclusion": "Pas parce que tu manques de motivation, mais parce qu'il te manque",
+        "conclusionHighlight": "un accompagnement clair et rassurant",
+        "reason": "✨ Ce défi existe pour ça."
+    },
+    "whatYouGet": {
+        "title": "Ce que tu obtiens avec le",
+        "titleHighlight": "défi 21 jours",
+        "benefits": {
+            "stepByStep": {
+                "title": "Avance étape par étape",
+                "description": "Pendant 21 jours, tu progresses à ton rythme pour enfin comprendre les cryptos sans te sentir perdu."
+            },
+            "clear": {
+                "title": "Des explications claires et accessibles",
+                "description": "Découvre comment fonctionne vraiment l'écosystème, sans jargon inutile."
+            },
+            "risks": {
+                "title": "Identifie les vrais risques",
+                "description": "Apprends à éviter les arnaques les plus courantes et à ne plus faire les erreurs classiques."
+            },
+            "support": {
+                "title": "Iaco t'accompagne",
+                "description": "Ton assistant IA répond à tes questions, te guide quand tu hésites et t'aide à avancer sans stress."
+            },
+            "confidence": {
+                "title": "De la confiance, pas de l'expertise",
+                "description": "À la fin des 21 jours, tu sais ce que tu fais, pourquoi tu le fais et comment avancer."
+            }
+        }
+    },
+    "howItWorks": {
+        "title": "Comment ça marche",
+        "steps": {
+            "signup": {
+                "title": "Inscris-toi au défi",
+                "description": "Rejoins et avance pendant 21 jours, étape par étape."
+            },
+            "daily": {
+                "title": "Un concept par jour",
+                "description": "Chaque jour, découvre un concept essentiel expliqué simplement, sans jargon inutile."
+            },
+            "support": {
+                "title": "Iaco t'accompagne",
+                "bullets": {
+                    "answers": "Il répond à tes questions",
+                    "helps": "Il t'aide quand tu doutes",
+                    "explains": "Il explique différemment si besoin"
+                }
+            },
+            "foundations": {
+                "title": "Construis des bases solides",
+                "description": "Jour après jour : meilleure compréhension, meilleure protection, éviter les erreurs courantes."
+            }
+        },
+        "conclusion": "À la fin du défi, tu sais où tu en es, {emphasis}.",
+        "conclusionEmphasis": "sans stress ni pression"
+    },
+    "whoWeAre": {
+        "title": "Qui sommes-nous",
+        "story1": {
+            "text": "Tout a commencé par une recherche très simple. Un jour, notre fondatrice a tapé :",
+            "search": "\"comment investir dans les cryptos ?\"",
+            "continuation": "Elle a trouvé des vidéos, des cours, des tutoriels partout. Mais quand il a fallu passer à l'action, quelque chose manquait : des explications claires, sans jargon, et surtout",
+            "highlight": "un vrai accompagnement"
+        },
+        "story2": {
+            "text": "Trop de complexité, trop de peur de se tromper, trop de pression. C'est là qu'elle a compris une chose essentielle :",
+            "highlight": "Le vrai problème n'est pas le manque d'informations, mais le manque d'accompagnement."
+        },
+        "story3": {
+            "text": "Elle a alors décidé de créer l'outil qu'elle aurait voulu avoir. Un",
+            "highlight": "guide simple et bienveillant",
+            "continuation": "qui explique sans juger et accompagne étape par étape.",
+            "birth": "Avec un développeur partageant la même vision,",
+            "iacoName": "Iaco",
+            "birthEnd": "est né. Un assistant intelligent conçu pour rendre les cryptos plus compréhensibles, plus humaines et accessibles à ceux qui veulent avancer en confiance."
+        }
+    },
+    "iacoAssistant": {
+        "title": "Iaco, ton assistant IA",
+        "intro": "Iaco est là pour t'aider à comprendre les cryptos, simplement. Tout au long du défi, il t'accompagne étape par étape.",
+        "features": {
+            "answers": {
+                "title": "Répond à tes questions",
+                "description": "Explique sans jargon et t'aide à avancer sans stress."
+            },
+            "neverAlone": {
+                "title": "Tu n'es jamais seul",
+                "description": "Apprends à ton rythme, sans pression ni jugement."
+            },
+            "noAccess": {
+                "title": "Pas d'accès à ton argent",
+                "description": "Iaco n'a pas accès à tes fonds et ne donne aucun conseil d'investissement."
+            },
+            "guidance": {
+                "title": "Juste de l'accompagnement",
+                "description": "Un assistant intelligent pour comprendre, éviter les erreurs et avancer en confiance."
+            }
+        }
+    },
+    "refund": {
+        "title": "Conditions de remboursement",
+        "promise": "Notre promesse est simple : si tu réussis le défi, tu peux être remboursé.",
+        "criteria": {
+            "intro": "Pour valider la réussite, tu dois simplement remplir ces conditions objectives :",
+            "lessons": "90% des leçons complétées",
+            "quiz": "Au moins 80% au quiz final",
+            "alerts": "2 alertes activées"
+        },
+        "conclusion": "Si ces critères sont remplis, tu peux demander ton remboursement,",
+        "conclusionHighlight": "sans discussion inutile",
+        "reason": "Cette garantie existe pour une seule raison : te permettre d'apprendre sans pression, avec un cadre clair et transparent."
+    },
+    "security": {
+        "title": "Sécurité, confiance et conformité",
+        "points": {
+            "noAdvice": {
+                "title": "Pas de conseil d'investissement",
+                "description": "Iaco est 100% éducatif. Nous t'aidons à comprendre les cryptos, pas à te dire quoi acheter."
+            },
+            "noKeys": {
+                "title": "Pas de clés privées demandées",
+                "description": "Pas de phrase de récupération, pas d'accès à tes comptes ou à ton argent."
+            },
+            "private": {
+                "title": "Tes données restent privées",
+                "description": "Nous ne partageons ni ne vendons tes informations. Jamais."
+            },
+            "control": {
+                "title": "Contrôle total",
+                "description": "Avance à ton rythme et arrête quand tu veux."
+            }
+        },
+        "conclusion": "Pas de promesses irréalistes, pas d'\"argent facile\",",
+        "conclusionHighlight": "juste un accompagnement clair, honnête et transparent"
+    },
+    "finalCta": {
+        "title": "Prêt à comprendre les cryptos",
+        "titleHighlight": "sans stress",
+        "subtitle": "Inscris-toi sur la liste d'attente bêta et sois parmi les premiers à rejoindre le défi.",
+        "cta": "Rejoindre la liste d'attente",
+        "assurance": "Pas de spam. Pas d'engagement. Juste un accès anticipé."
+    },
+    "betaModal": {
+        "title": "Oups… pas encore disponible",
+        "description": "La liste d'attente n'est pas encore ouverte. Nous finalisons les derniers détails avant le lancement de la bêta.",
+        "message": "🚀 Reviens très bientôt, le défi arrive.",
+        "button": "Compris"
+    },
+    "footer": {
+        "description": "Ton assistant IA pour apprendre les cryptos. Maîtrise les cryptomonnaies avec un accompagnement personnalisé, un suivi de portefeuille en temps réel et des informations éducatives conçues pour les débutants.",
+        "product": "Produit",
+        "features": "Fonctionnalités",
+        "livePrices": "Prix en direct",
+        "faq": "FAQ",
+        "resources": "Ressources",
+        "documentation": "Documentation",
+        "learningCenter": "Centre d'apprentissage",
+        "apiReference": "Référence API",
+        "community": "Communauté",
+        "legal": "Mentions légales",
+        "privacyPolicy": "Politique de confidentialité",
+        "termsOfService": "Conditions d'utilisation",
+        "cookiePolicy": "Politique des cookies",
+        "disclaimer": "Avertissement",
+        "copyright": "© {year} IACO. Tous droits réservés.",
+        "educationalNotice": "À but éducatif uniquement. Pas un conseil financier. Fais toujours tes propres recherches."
+    },
+    "dashboard": {
+        "greeting": {
+            "morning": "Bonjour",
+            "afternoon": "Bon après-midi",
+            "evening": "Bonsoir"
+        },
+        "welcome": "Prêt à continuer ton parcours d'apprentissage crypto ?",
+        "experienceLevel": {
+            "beginner": "Débutant",
+            "intermediate": "Intermédiaire"
+        },
+        "explorer": "Explorateur",
+        "stats": {
+            "portfolio": "Portefeuille",
+            "notConnected": "Non connecté",
+            "connectBinance": "Connecte Binance pour suivre",
+            "progress": "Progression",
+            "startLearning": "Commence à apprendre ci-dessous",
+            "yourGoal": "Ton objectif",
+            "focusArea": "Domaine de focus"
+        },
+        "quickActions": {
+            "title": "Actions rapides",
+            "askAI": {
+                "title": "Demander au Coach IA",
+                "description": "Obtiens des réponses instantanées à tes questions crypto"
+            },
+            "startLearning": {
+                "title": "Commencer à apprendre",
+                "description": "Regarde des tutoriels adaptés aux débutants"
+            },
+            "connectBinance": {
+                "title": "Connecter Binance",
+                "description": "Suis ton portefeuille en temps réel"
+            }
+        },
+        "dailyChallenge": {
+            "title": "Défi du jour",
+            "todaysChallenge": "Défi du jour : Les bases des cryptos",
+            "duration": "5 min de lecture",
+            "xp": "+50 XP"
+        },
+        "educationalBanner": {
+            "title": "📚 Rappel : L'éducation d'abord",
+            "description": "Cette application est conçue pour t'aider à apprendre les cryptomonnaies. Tout le contenu est à but éducatif uniquement et ne doit pas être considéré comme un conseil financier. Fais toujours tes propres recherches avant de prendre des décisions d'investissement."
+        }
+    },
+    "account": {
+        "title": "Paramètres du compte",
+        "subtitle": "Gère ton profil, tes préférences et tes paramètres de sécurité",
+        "sections": {
+            "profile": "Profil",
+            "preferences": "Préférences",
+            "binance": "Binance",
+            "security": "Sécurité"
+        },
+        "profile": {
+            "title": "Informations personnelles",
+            "description": "Mets à jour ton nom et tes coordonnées",
+            "name": "Nom complet",
+            "email": "Adresse e-mail",
+            "phone": "Numéro de téléphone"
+        },
+        "preferences": {
+            "title": "Préférences d'apprentissage",
+            "description": "Personnalise ton expérience d'apprentissage",
+            "experienceLevel": "Niveau d'expérience",
+            "interests": "Centres d'intérêt",
+            "riskTolerance": "Tolérance au risque"
+        },
+        "binance": {
+            "title": "Intégration Binance",
+            "description": "Connecte ton compte Binance pour le suivi de portefeuille",
+            "status": {
+                "connected": "Connecté",
+                "paused": "En pause",
+                "notConnected": "Non connecté"
+            }
+        },
+        "security": {
+            "title": "Sécurité",
+            "description": "Gère la sécurité de ton compte"
+        }
+    },
+    "onboarding": {
+        "welcome": {
+            "title": "Bienvenue sur IACO",
+            "subtitle": "Ton assistant IA personnel pour apprendre les cryptos",
+            "cta": "Commençons"
+        },
+        "experience": {
+            "title": "Quelle est ton expérience avec les cryptos ?",
+            "beginner": "Débutant",
+            "beginnerDesc": "Je suis nouveau dans les cryptomonnaies",
+            "intermediate": "Intermédiaire",
+            "intermediateDesc": "Je connais les bases",
+            "advanced": "Avancé",
+            "advancedDesc": "J'ai de l'expérience avec les cryptos"
+        },
+        "goals": {
+            "title": "Quels sont tes objectifs ?",
+            "learning": "Apprendre",
+            "investing": "Investir",
+            "trading": "Trading",
+            "defi": "DeFi",
+            "nfts": "NFTs"
+        },
+        "complete": {
+            "title": "Tu es prêt !",
+            "subtitle": "Ton parcours d'apprentissage personnalisé est prêt",
+            "cta": "Aller au tableau de bord"
+        }
+    },
+    "chat": {
+        "title": "CryptoCoach",
+        "disclaimer": "Ceci est un assistant IA à but éducatif uniquement. Pas un conseil financier.",
+        "placeholder": "Pose-moi n'importe quelle question sur les cryptos...",
+        "send": "Envoyer",
+        "retry": "Réessayer"
+    },
+    "auth": {
+        "signIn": {
+            "title": "Bon retour",
+            "subtitle": "Connecte-toi pour continuer ton parcours d'apprentissage crypto",
+            "google": "Continuer avec Google",
+            "noAccount": "Tu n'as pas de compte ?",
+            "signUp": "S'inscrire"
+        },
+        "signUp": {
+            "title": "Crée ton compte",
+            "subtitle": "Commence ton défi d'apprentissage crypto de 21 jours",
+            "google": "Continuer avec Google",
+            "hasAccount": "Tu as déjà un compte ?",
+            "signIn": "Se connecter"
+        }
+    }
+}

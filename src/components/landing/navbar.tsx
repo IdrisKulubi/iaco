@@ -1,21 +1,25 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { ModeToggle } from '@/components/themes/mode-toggle';
 import { Button } from '@/components/ui/button';
 import { UserProfileDropdown } from './user-profile-dropdown';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import { authClient } from '@/lib/auth-client';
 
 export function LandingNavbar() {
   const { data: session, isPending } = authClient.useSession();
+  const t = useTranslations('nav');
+  const tCommon = useTranslations('common');
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-
-            <span className="text-xl font-bold text-primary  ">
+            <span className="text-xl font-bold text-primary">
               IACO
             </span>
           </Link>
@@ -23,18 +27,19 @@ export function LandingNavbar() {
           {/* Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <a href="#how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
-              How It Works
+              {t('howItWorks')}
             </a>
             <a href="#who-we-are" className="text-sm font-medium hover:text-primary transition-colors">
-              About
+              {t('about')}
             </a>
             <a href="#refund" className="text-sm font-medium hover:text-primary transition-colors">
-              Refund
+              {t('theChallenge')}
             </a>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             <ModeToggle />
 
             {isPending ? (
@@ -45,10 +50,10 @@ export function LandingNavbar() {
               <>
                 <div className="hidden md:flex gap-2">
                   <Button variant="ghost" asChild>
-                    <Link href="/sign-in">Sign In</Link>
+                    <Link href="/sign-in">{tCommon('signIn')}</Link>
                   </Button>
-                  <Button asChild>
-                    <Link href="/sign-up">Get Started</Link>
+                  <Button variant="outline" asChild>
+                    <Link href="/sign-up">{tCommon('getStarted')}</Link>
                   </Button>
                 </div>
                 <Button size="sm" className="md:hidden" asChild>

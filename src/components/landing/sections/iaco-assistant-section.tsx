@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -13,31 +14,12 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const features = [
-    {
-        icon: ChatCircleDotsIcon,
-        title: 'Answers your questions',
-        description: 'Explains without jargon and helps you move forward without stress.',
-    },
-    {
-        icon: HandHeartIcon,
-        title: 'You are never alone',
-        description: 'Learn at your own pace, without pressure or judgment.',
-    },
-    {
-        icon: ProhibitIcon,
-        title: 'No access to your money',
-        description: 'Iaco has no access to your funds and gives no investment advice.',
-    },
-    {
-        icon: ShieldCheckIcon,
-        title: 'Just guidance',
-        description: 'An intelligent assistant to understand, avoid mistakes, and move forward with confidence.',
-    },
-];
+const featureIcons = [ChatCircleDotsIcon, HandHeartIcon, ProhibitIcon, ShieldCheckIcon];
+const featureKeys = ['answers', 'neverAlone', 'noAccess', 'guidance'];
 
 export function IacoAssistantSection() {
     const sectionRef = useRef<HTMLElement>(null);
+    const t = useTranslations('iacoAssistant');
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -101,31 +83,27 @@ export function IacoAssistantSection() {
         >
             <div className="container mx-auto px-4 lg:px-8">
                 <div className="max-w-5xl mx-auto">
-                    {/* Title */}
                     <div className="text-center mb-12">
                         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
                             <RobotIcon className="w-10 h-10 text-primary" weight="fill" />
                         </div>
                         <h2 className="iaco-title text-3xl md:text-4xl lg:text-5xl font-bold">
-                            Iaco, your AI assistant
+                            {t('title')}
                         </h2>
                     </div>
 
-                    {/* Intro */}
                     <div className="iaco-intro text-center mb-12">
                         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                            Iaco is here to help you understand crypto, simply.
-                            Throughout the entire challenge, it supports you step by step.
+                            {t('intro')}
                         </p>
                     </div>
 
-                    {/* Features Grid */}
                     <div className="iaco-features-grid grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {features.map((feature, index) => {
-                            const Icon = feature.icon;
+                        {featureKeys.map((key, index) => {
+                            const Icon = featureIcons[index];
                             return (
                                 <div
-                                    key={index}
+                                    key={key}
                                     className="iaco-feature p-6 rounded-2xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 shadow-sm"
                                 >
                                     <div className="flex items-start gap-4">
@@ -133,8 +111,8 @@ export function IacoAssistantSection() {
                                             <Icon className="w-6 h-6 text-primary" weight="fill" />
                                         </div>
                                         <div>
-                                            <h3 className="text-lg font-semibold mb-1">{feature.title}</h3>
-                                            <p className="text-muted-foreground text-sm">{feature.description}</p>
+                                            <h3 className="text-lg font-semibold mb-1">{t(`features.${key}.title`)}</h3>
+                                            <p className="text-muted-foreground text-sm">{t(`features.${key}.description`)}</p>
                                         </div>
                                     </div>
                                 </div>
