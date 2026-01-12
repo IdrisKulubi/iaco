@@ -2,7 +2,7 @@
 
 An intelligent cryptocurrency assistant designed to help beginners learn, track portfolios, and get personalized guidance through AI-powered conversations.
 
-## 🚀 Features
+##  Features
 
 - **AI-Powered Chat Assistant**: Get educational guidance and crypto insights through conversational AI
 - **Portfolio Tracking**: Connect Binance API to track your cryptocurrency holdings
@@ -24,7 +24,7 @@ An intelligent cryptocurrency assistant designed to help beginners learn, track 
 - **Hosting**: Vercel
 - **Package Manager**: pnpm
 
-## 📋 Prerequisites
+##  Prerequisites
 
 - Node.js 18+
 - pnpm (recommended) or npm
@@ -32,7 +32,7 @@ An intelligent cryptocurrency assistant designed to help beginners learn, track 
 - Google OAuth credentials
 - Binance API credentials (optional, for portfolio tracking)
 
-## 🚀 Getting Started
+##  Getting Started
 
 1. **Clone the repository**
 
@@ -93,7 +93,7 @@ An intelligent cryptocurrency assistant designed to help beginners learn, track 
    
    Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
-## 📁 Project Structure
+##  Project Structure
 
 ```text
 iaco/
@@ -125,7 +125,7 @@ The application uses the following main tables:
 - **chatMessages**: AI conversation history
 - **priceCache**: Cached cryptocurrency prices
 
-## 🤖 AI Assistant Features
+##  AI Assistant Features
 
 The AI assistant provides:
 
@@ -136,7 +136,7 @@ The AI assistant provides:
 - Beginner-friendly explanations
 - **Important**: Not financial advice - educational purposes only
 
-## 🔐 Security Features
+##  Security Features
 
 - Encrypted API credentials storage
 - Secure authentication with Better Auth
@@ -145,15 +145,15 @@ The AI assistant provides:
 - Read-only Binance API integration
 
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## ⚠️ Disclaimer
+##  Disclaimer
 
 This application is for educational purposes only. The AI assistant provides educational content about cryptocurrency but does not provide financial advice. Always do your own research and consult with financial professionals before making investment decisions.
 
-## 🐛 Issues & Support
+##  Issues & Support
 
 If you encounter any issues or have questions:
 
@@ -161,7 +161,7 @@ If you encounter any issues or have questions:
 2. Create a new issue if your problem isn't already reported
 3. Provide detailed information about the problem
 
-## 🗺️ Roadmap
+##  Roadmap
 
 - [ ] Advanced portfolio analytics
 - [ ] Multi-exchange support (Coinbase, Kraken)
