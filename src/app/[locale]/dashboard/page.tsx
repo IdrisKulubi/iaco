@@ -4,16 +4,26 @@ import { auth } from '@/lib/auth';
 import db from '@/db/drizzle';
 import { userProfiles, users } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { DashboardContent } from './dashboard-content';
+import { DashboardContent } from '@/components/dashboard/dashboard-content';
+import { setRequestLocale } from 'next-intl/server';
 
-export default async function DashboardPage() {
+type Props = {
+    params: Promise<{ locale: string }>;
+};
+
+export default async function DashboardPage({ params }: Props) {
+    const { locale } = await params;
+
+    // Enable static rendering
+    setRequestLocale(locale);
+
     // Get session
     const session = await auth.api.getSession({
         headers: await headers(),
     });
 
     if (!session?.user) {
-        redirect('/sign-in');
+        redirect(`/${locale}/sign-in`);
     }
 
     // Get user profile
@@ -37,7 +47,7 @@ export default async function DashboardPage() {
 
     // If no profile or onboarding not complete, redirect
     if (!userProfile?.completedOnboarding) {
-        redirect('/onboarding');
+        redirect(`/${locale}/onboarding`);
     }
 
     return (

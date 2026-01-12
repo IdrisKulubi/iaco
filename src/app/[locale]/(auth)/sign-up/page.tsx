@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations } from 'next-intl';
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
@@ -41,8 +42,13 @@ export default function SignUpPage() {
         <div className="min-h-dvh w-full grid place-items-center px-6 bg-gray-900">
             <Card className="w-full max-w-md bg-gray-800 border border-gray-700 shadow-2xl">
                 <CardHeader className="space-y-3">
-                    <div className="mx-auto h-12 w-12 rounded-2xl bg-primary/10 grid place-items-center">
-                        <span className="text-xl font-bold text-primary">IACO</span>
+                    <div className="mx-auto h-16 w-16 relative mb-4">
+                        <Image
+                            src="/logo.png"
+                            alt="IACO Logo"
+                            fill
+                            className="object-contain"
+                        />
                     </div>
                     <CardTitle className="text-2xl text-center tracking-tight text-white">
                         {t('title')}
