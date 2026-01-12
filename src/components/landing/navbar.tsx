@@ -1,6 +1,7 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { ModeToggle } from '@/components/themes/mode-toggle';
 import { Button } from '@/components/ui/button';
@@ -19,6 +20,14 @@ export function LandingNavbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
+            <div className="relative w-8 h-8">
+              <Image
+                src="/logo.png"
+                alt="IACO Logo"
+                fill
+                className="object-contain"
+              />
+            </div>
             <span className="text-xl font-bold text-primary">
               IACO
             </span>
@@ -26,15 +35,15 @@ export function LandingNavbar() {
 
           {/* Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="#how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link href="#how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
               {t('howItWorks')}
-            </a>
-            <a href="#who-we-are" className="text-sm font-medium hover:text-primary transition-colors">
+            </Link>
+            <Link href="#who-we-are" className="text-sm font-medium hover:text-primary transition-colors">
               {t('about')}
-            </a>
-            <a href="#refund" className="text-sm font-medium hover:text-primary transition-colors">
+            </Link>
+            <Link href="#refund" className="text-sm font-medium hover:text-primary transition-colors">
               {t('theChallenge')}
-            </a>
+            </Link>
           </div>
 
           {/* Actions */}

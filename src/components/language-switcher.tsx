@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -14,26 +14,15 @@ import { GlobeIcon } from '@phosphor-icons/react';
 const languages = [
     { code: 'en', name: 'English', flag: '🇬🇧' },
     { code: 'fr', name: 'Français', flag: '🇫🇷' },
-];
+] as const;
 
 export function LanguageSwitcher() {
     const locale = useLocale();
     const router = useRouter();
     const pathname = usePathname();
 
-    const handleLanguageChange = (newLocale: string) => {
-        // Remove current locale from pathname and add new one
-        const segments = pathname.split('/');
-
-        // Check if first segment is a locale
-        if (segments[1] === 'en' || segments[1] === 'fr') {
-            segments[1] = newLocale;
-        } else {
-            segments.splice(1, 0, newLocale);
-        }
-
-        const newPath = segments.join('/') || '/';
-        router.push(newPath);
+    const handleLanguageChange = (newLocale: 'en' | 'fr') => {
+        router.replace(pathname, { locale: newLocale });
     };
 
     const currentLanguage = languages.find((lang) => lang.code === locale) || languages[0];

@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import {
     UserIcon,
@@ -33,18 +34,19 @@ interface AccountContentProps {
     } | null;
 }
 
-const navItems = [
-    { id: 'profile', label: 'Profile', icon: UserIcon },
-    { id: 'preferences', label: 'Preferences', icon: GearIcon },
-    { id: 'binance', label: 'Binance', icon: KeyIcon },
-    { id: 'security', label: 'Security', icon: ShieldCheckIcon },
-];
-
 export function AccountContent({ user, profile }: AccountContentProps) {
+    const t = useTranslations('account');
     const containerRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const navRef = useRef<HTMLDivElement>(null);
     const sectionsRef = useRef<HTMLDivElement>(null);
+
+    const navItems = [
+        { id: 'profile', label: t('sections.profile'), icon: UserIcon },
+        { id: 'preferences', label: t('sections.preferences'), icon: GearIcon },
+        { id: 'binance', label: t('sections.binance'), icon: KeyIcon },
+        { id: 'security', label: t('sections.security'), icon: ShieldCheckIcon },
+    ];
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -142,7 +144,7 @@ export function AccountContent({ user, profile }: AccountContentProps) {
                         <div className="sticky top-24">
                             <div className="flex items-center gap-2 mb-6">
                                 <SparkleIcon className="w-5 h-5 text-purple-400" weight="fill" />
-                                <h1 className="text-xl font-bold text-white">Account Settings</h1>
+                                <h1 className="text-xl font-bold text-white">{t('title')}</h1>
                             </div>
                             <nav ref={navRef} className="space-y-2">
                                 {navItems.map((item) => {
@@ -172,8 +174,8 @@ export function AccountContent({ user, profile }: AccountContentProps) {
                                         <UserIcon className="w-5 h-5 text-blue-400" />
                                     </div>
                                     <div>
-                                        <h2 className="text-lg font-semibold text-white">Profile</h2>
-                                        <p className="text-sm text-slate-400">Update your personal information</p>
+                                        <h2 className="text-lg font-semibold text-white">{t('profile.title')}</h2>
+                                        <p className="text-sm text-slate-400">{t('profile.description')}</p>
                                     </div>
                                 </div>
                                 <div className="p-6">
@@ -194,8 +196,8 @@ export function AccountContent({ user, profile }: AccountContentProps) {
                                         <GearIcon className="w-5 h-5 text-purple-400" />
                                     </div>
                                     <div>
-                                        <h2 className="text-lg font-semibold text-white">Preferences</h2>
-                                        <p className="text-sm text-slate-400">Customize your experience and learning path</p>
+                                        <h2 className="text-lg font-semibold text-white">{t('preferences.title')}</h2>
+                                        <p className="text-sm text-slate-400">{t('preferences.description')}</p>
                                     </div>
                                 </div>
                                 <div className="p-6">
@@ -218,8 +220,8 @@ export function AccountContent({ user, profile }: AccountContentProps) {
                                         <KeyIcon className="w-5 h-5 text-amber-400" />
                                     </div>
                                     <div>
-                                        <h2 className="text-lg font-semibold text-white">Binance Connection</h2>
-                                        <p className="text-sm text-slate-400">Connect your Binance account for portfolio tracking</p>
+                                        <h2 className="text-lg font-semibold text-white">{t('binance.title')}</h2>
+                                        <p className="text-sm text-slate-400">{t('binance.description')}</p>
                                     </div>
                                 </div>
                                 <div className="p-6">
@@ -236,8 +238,8 @@ export function AccountContent({ user, profile }: AccountContentProps) {
                                         <ShieldCheckIcon className="w-5 h-5 text-emerald-400" />
                                     </div>
                                     <div>
-                                        <h2 className="text-lg font-semibold text-white">Security</h2>
-                                        <p className="text-sm text-slate-400">Manage your authentication and sessions</p>
+                                        <h2 className="text-lg font-semibold text-white">{t('security.title')}</h2>
+                                        <p className="text-sm text-slate-400">{t('security.description')}</p>
                                     </div>
                                 </div>
                                 <div className="p-6 space-y-6">

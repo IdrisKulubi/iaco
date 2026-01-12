@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import Link from 'next/link';
+import { Link, useRouter } from '@/i18n/navigation';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import {
     ChatCircleIcon,
@@ -22,7 +23,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { ChatBubbleWrapper } from '@/components/chat/chat-bubble-wrapper';
 import { authClient } from '@/lib/auth-client';
-import { useRouter } from 'next/navigation';
 
 interface DashboardContentProps {
     user: {
@@ -37,38 +37,9 @@ interface DashboardContentProps {
     };
 }
 
-const quickActions = [
-    {
-        id: 'chat',
-        title: 'Ask AI Coach',
-        description: 'Get instant answers to your crypto questions',
-        icon: ChatCircleIcon,
-        gradient: 'from-blue-500 to-cyan-500',
-        href: '#',
-        action: () => window.dispatchEvent(new Event('open-chat-dialog')),
-    },
-    {
-        id: 'learn',
-        title: 'Start Learning',
-        description: 'Watch beginner-friendly tutorials',
-        icon: BookOpenIcon,
-        gradient: 'from-purple-500 to-pink-500',
-        href: '/learn',
-    },
-    {
-        id: 'connect',
-        title: 'Connect Binance',
-        description: 'Track your portfolio in real-time',
-        icon: WalletIcon,
-        gradient: 'from-amber-500 to-orange-500',
-        href: '/account',
-    },
-];
-
-
-
 export function DashboardContent({ user, profile }: DashboardContentProps) {
     const router = useRouter();
+    const t = useTranslations('dashboard');
     const containerRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const statsRef = useRef<HTMLDivElement>(null);
@@ -77,9 +48,9 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
 
     const getGreeting = () => {
         const hour = new Date().getHours();
-        if (hour < 12) return 'Good morning';
-        if (hour < 18) return 'Good afternoon';
-        return 'Good evening';
+        if (hour < 12) return t('greeting.morning');
+        if (hour < 18) return t('greeting.afternoon');
+        return t('greeting.evening');
     };
 
     const handleSignOut = async () => {
@@ -127,7 +98,7 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                 { opacity: 0, x: 30 },
                 {
                     opacity: 1,
-                    x: 0,
+                    y: 0,
                     duration: 0.5,
                     stagger: 0.1,
                     delay: 0.6,
@@ -138,6 +109,34 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
 
         return () => ctx.revert();
     }, []);
+
+    const quickActions = [
+        {
+            id: 'chat',
+            title: t('quickActions.askAI.title'),
+            description: t('quickActions.askAI.description'),
+            icon: ChatCircleIcon,
+            gradient: 'from-blue-500 to-cyan-500',
+            href: '#',
+            action: () => window.dispatchEvent(new Event('open-chat-dialog')),
+        },
+        {
+            id: 'learn',
+            title: t('quickActions.startLearning.title'),
+            description: t('quickActions.startLearning.description'),
+            icon: BookOpenIcon,
+            gradient: 'from-purple-500 to-pink-500',
+            href: '/learn',
+        },
+        {
+            id: 'connect',
+            title: t('quickActions.connectBinance.title'),
+            description: t('quickActions.connectBinance.description'),
+            icon: WalletIcon,
+            gradient: 'from-amber-500 to-orange-500',
+            href: '/account',
+        },
+    ];
 
     return (
         <div
@@ -157,8 +156,13 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                                <LightningIcon className="w-5 h-5 text-white" weight="fill" />
+                            <div className="w-10 h-10 relative">
+                                <Image
+                                    src="/logo.png"
+                                    alt="IACO Logo"
+                                    fill
+                                    className="object-contain"
+                                />
                             </div>
                             <span className="text-xl font-bold text-white">IACO</span>
                         </div>
@@ -205,14 +209,16 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                     <div className="flex items-center gap-2 mb-2">
                         <SparkleIcon className="w-5 h-5 text-amber-400" weight="fill" />
                         <span className="text-amber-400 text-sm font-medium">
-                            {profile.experienceLevel === 'beginner' ? 'Beginner' : 'Intermediate'} Explorer
+                            {profile.experienceLevel === 'beginner'
+                                ? t('experienceLevel.beginner')
+                                : t('experienceLevel.intermediate')} {t('explorer')}
                         </span>
                     </div>
                     <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                         {getGreeting()}, {user.name.split(' ')[0]}! 👋
                     </h1>
                     <p className="text-slate-400 text-lg">
-                        Ready to continue your crypto learning journey?
+                        {t('welcome')}
                     </p>
                 </div>
 
@@ -224,10 +230,10 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                             <div className="p-2 rounded-lg bg-emerald-500/20">
                                 <TrendUpIcon className="w-5 h-5 text-emerald-400" />
                             </div>
-                            <span className="text-xs text-slate-500">Portfolio</span>
+                            <span className="text-xs text-slate-500">{t('stats.portfolio')}</span>
                         </div>
-                        <p className="text-2xl font-bold text-white mb-1">Not Connected</p>
-                        <p className="text-sm text-slate-400">Connect Binance to track</p>
+                        <p className="text-2xl font-bold text-white mb-1">{t('stats.notConnected')}</p>
+                        <p className="text-sm text-slate-400">{t('stats.connectBinance')}</p>
                     </div>
 
                     {/* Learning Progress */}
@@ -236,10 +242,10 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                             <div className="p-2 rounded-lg bg-purple-500/20">
                                 <ChartBarIcon className="w-5 h-5 text-purple-400" />
                             </div>
-                            <span className="text-xs text-slate-500">Progress</span>
+                            <span className="text-xs text-slate-500">{t('stats.progress')}</span>
                         </div>
                         <p className="text-2xl font-bold text-white mb-1">0%</p>
-                        <p className="text-sm text-slate-400">Start learning below</p>
+                        <p className="text-sm text-slate-400">{t('stats.startLearning')}</p>
                     </div>
 
                     {/* Goals */}
@@ -248,12 +254,12 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                             <div className="p-2 rounded-lg bg-amber-500/20">
                                 <TargetIcon className="w-5 h-5 text-amber-400" />
                             </div>
-                            <span className="text-xs text-slate-500">Your Goal</span>
+                            <span className="text-xs text-slate-500">{t('stats.yourGoal')}</span>
                         </div>
                         <p className="text-2xl font-bold text-white mb-1 capitalize">
                             {profile.objectives[0]?.replace('defi', 'DeFi').replace('-', ' ') || 'Learning'}
                         </p>
-                        <p className="text-sm text-slate-400">Focus area</p>
+                        <p className="text-sm text-slate-400">{t('stats.focusArea')}</p>
                     </div>
                 </div>
 
@@ -263,7 +269,7 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                     <div ref={actionsRef}>
                         <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                             <LightningIcon className="w-5 h-5 text-amber-400" weight="fill" />
-                            Quick Actions
+                            {t('quickActions.title')}
                         </h2>
                         <div className="space-y-4">
                             {quickActions.map((action) => {
@@ -304,7 +310,7 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                     <div ref={learningRef}>
                         <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                             <BookOpenIcon className="w-5 h-5 text-purple-400" />
-                            Daily Challenge
+                            {t('dailyChallenge.title')}
                         </h2>
                         <div className="learning-card bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-slate-800/50 p-5 hover:border-slate-700 transition-all duration-300 cursor-pointer group">
                             <div className="flex items-center gap-4">
@@ -313,12 +319,12 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                                 </div>
                                 <div className="flex-1">
                                     <h3 className="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors">
-                                        Today&apos;s Challenge: Crypto Basics
+                                        {t('dailyChallenge.todaysChallenge')}
                                     </h3>
                                     <div className="flex items-center gap-3 text-sm text-slate-400">
-                                        <span>5 min read</span>
+                                        <span>{t('dailyChallenge.duration')}</span>
                                         <span>•</span>
-                                        <span>+50 XP</span>
+                                        <span>{t('dailyChallenge.xp')}</span>
                                     </div>
                                 </div>
                                 <Button
@@ -347,12 +353,10 @@ export function DashboardContent({ user, profile }: DashboardContentProps) {
                         </div>
                         <div className="flex-1">
                             <h3 className="text-lg font-semibold text-white mb-1">
-                                📚 Remember: Education First
+                                {t('educationalBanner.title')}
                             </h3>
                             <p className="text-slate-300 text-sm leading-relaxed">
-                                This app is designed to help you learn about cryptocurrency. All content is for
-                                educational purposes only and should not be considered financial advice. Always
-                                do your own research before making any investment decisions.
+                                {t('educationalBanner.description')}
                             </p>
                         </div>
                     </div>

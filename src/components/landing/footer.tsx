@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faRedditAlien, faYoutube, faDiscord, faFacebookF, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
@@ -22,6 +23,14 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
+              <div className="relative w-8 h-8">
+                <Image
+                  src="/logo.png"
+                  alt="IACO Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
               <span className="text-xl font-bold bg-clip-text text-primary">
                 IACO
               </span>

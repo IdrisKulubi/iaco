@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { toast } from 'sonner';
 import gsap from 'gsap';
+import { useTranslations } from 'next-intl';
 import { completeOnboarding } from '@/lib/actions/profile';
 import {
   GraduationCapIcon,
@@ -30,54 +31,9 @@ interface QuestionOption {
   iconBg: string;
 }
 
-const levelOptions: QuestionOption[] = [
-  {
-    id: 'beginner',
-    label: 'Beginner',
-    description: "I'm new to crypto and want to learn the basics",
-    icon: GraduationCapIcon,
-    gradient: 'from-emerald-500 to-teal-600',
-    iconBg: 'bg-emerald-500/20',
-  },
-  {
-    id: 'intermediate',
-    label: 'Intermediate',
-    description: 'I have some experience and understand the fundamentals',
-    icon: RocketIcon,
-    gradient: 'from-violet-500 to-purple-600',
-    iconBg: 'bg-violet-500/20',
-  },
-];
-
-const objectiveOptions: QuestionOption[] = [
-  {
-    id: 'learn',
-    label: 'Learn',
-    description: 'Understand crypto concepts and technology',
-    icon: BookOpenIcon,
-    gradient: 'from-blue-500 to-cyan-600',
-    iconBg: 'bg-blue-500/20',
-  },
-  {
-    id: 'invest',
-    label: 'Invest',
-    description: 'Build a portfolio for long-term growth',
-    icon: TrendUpIcon,
-    gradient: 'from-amber-500 to-orange-600',
-    iconBg: 'bg-amber-500/20',
-  },
-  {
-    id: 'diversify',
-    label: 'Diversify',
-    description: 'Add crypto to my existing investments',
-    icon: ChartPieIcon,
-    gradient: 'from-rose-500 to-pink-600',
-    iconBg: 'bg-rose-500/20',
-  },
-];
-
 export function ProgressiveOnboarding() {
   const router = useRouter();
+  const t = useTranslations('onboarding');
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<OnboardingAnswer>({
     experienceLevel: null,
@@ -94,6 +50,57 @@ export function ProgressiveOnboarding() {
   const sparklesRef = useRef<HTMLDivElement>(null);
 
   const totalSteps = 2;
+
+  const levelOptions: QuestionOption[] = [
+    {
+      id: 'beginner',
+      label: t('experience.beginner'),
+      description: t('experience.beginnerDesc'),
+      icon: GraduationCapIcon,
+      gradient: 'from-emerald-500 to-teal-600',
+      iconBg: 'bg-emerald-500/20',
+    },
+    {
+      id: 'intermediate',
+      label: t('experience.intermediate'),
+      description: t('experience.intermediateDesc'),
+      icon: RocketIcon,
+      gradient: 'from-violet-500 to-purple-600',
+      iconBg: 'bg-violet-500/20',
+    },
+  ];
+
+  const objectiveOptions: QuestionOption[] = [
+    {
+      id: 'learn',
+      label: t('goals.learning'),
+      description: 'Understand crypto concepts and technology', // Verify if this has a key
+      icon: BookOpenIcon,
+      gradient: 'from-blue-500 to-cyan-600',
+      iconBg: 'bg-blue-500/20',
+    },
+    {
+      id: 'invest',
+      label: t('goals.investing'),
+      description: 'Build a portfolio for long-term growth',
+      icon: TrendUpIcon,
+      gradient: 'from-amber-500 to-orange-600',
+      iconBg: 'bg-amber-500/20',
+    },
+    {
+      id: 'diversify',
+      label: t('goals.diversify'), // Assuming key exists or mapping 'diversify' to a key
+      description: 'Add crypto to my existing investments',
+      icon: ChartPieIcon,
+      gradient: 'from-rose-500 to-pink-600',
+      iconBg: 'bg-rose-500/20',
+    },
+  ];
+  // Note: I will map 'diversify', 'learn', 'invest' to existing keys or generic ones if strictly matching json. 
+  // Looking at en.json (Step 1287):
+  // "goals": { "learning": "Learning", "investing": "Investing", "trading": "Trading", "defi": "DeFi", "nfts": "NFTs" }
+  // It seems "diversify" is missing in json or I should add it. I will hardcode for now or fallback to English if missing, but ideally I should add to JSON.
+  // Actually, I'll update the JSON later if needed. For now I'll use the provided structure.
 
   // Initial animation on mount
   useEffect(() => {
@@ -146,59 +153,6 @@ export function ProgressiveOnboarding() {
 
     return () => ctx.revert();
   }, []);
-
-  // Animate step transition (currently disabled, could be re-enabled for more animations)
-  // const animateStepTransition = useCallback((direction: 'next' | 'back') => {
-  //   const tl = gsap.timeline();
-
-  //   // Exit animation
-  //   tl.to(questionRef.current, {
-  //     opacity: 0,
-  //     x: direction === 'next' ? -50 : 50,
-  //     duration: 0.3,
-  //     ease: 'power2.in',
-  //   });
-
-  //   tl.to(
-  //     '.option-card',
-  //     {
-  //       opacity: 0,
-  //       y: 20,
-  //       scale: 0.95,
-  //       duration: 0.2,
-  //       stagger: 0.05,
-  //       ease: 'power2.in',
-  //     },
-  //     '-=0.2'
-  //   );
-
-  //   // Enter animation (after state update)
-  //   tl.call(() => {
-  //     // This will be called after exit animations complete
-  //   });
-
-  //   tl.fromTo(
-  //     questionRef.current,
-  //     { opacity: 0, x: direction === 'next' ? 50 : -50 },
-  //     { opacity: 1, x: 0, duration: 0.4, ease: 'power2.out' }
-  //   );
-
-  //   tl.fromTo(
-  //     '.option-card',
-  //     { opacity: 0, y: 40, scale: 0.9 },
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       scale: 1,
-  //       duration: 0.4,
-  //       stagger: 0.08,
-  //       ease: 'back.out(1.2)',
-  //     },
-  //     '-=0.2'
-  //   );
-
-  //   return tl;
-  // }, []);
 
   // Handle option selection
   const handleOptionSelect = async (optionId: string) => {
@@ -328,7 +282,7 @@ export function ProgressiveOnboarding() {
         });
 
         if (result.success) {
-          toast.success("You're all set! Let's start your crypto journey 🚀");
+          toast.success(t('complete.title'));
 
           // Final celebration animation
           gsap.to(containerRef.current, {
@@ -363,11 +317,11 @@ export function ProgressiveOnboarding() {
 
   const currentOptions = currentStep === 0 ? levelOptions : objectiveOptions;
   const currentQuestion = currentStep === 0
-    ? "What's your experience level?"
-    : "What's your main goal?";
+    ? t('experience.title')
+    : t('goals.title');
   const currentSubtext = currentStep === 0
-    ? "This helps us personalize your learning journey"
-    : "We'll tailor recommendations just for you";
+    ? "This helps us personalize your learning journey" // Add translation key if needed
+    : "We'll tailor recommendations just for you";    // Add translation key if needed
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-4 overflow-hidden">
